@@ -129,3 +129,6 @@ Desktop.ini
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Personal files
+database/populate.sql
