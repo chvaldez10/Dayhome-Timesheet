@@ -1,5 +1,6 @@
 # Note: dropping the database and tables will results data loss
 CREATE DATABASE DayHomeDatabase;
+USE DayHomeDatabase;
 
 CREATE TABLE Admin(
     AdminID INT AUTO_INCREMENT PRIMARY KEY,
