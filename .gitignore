@@ -17,6 +17,7 @@ yarn-error.log
 build/
 
 # Environment local files should not be committed to a version control system
+.env
 .env.local
 .env.development.local
 .env.test.local

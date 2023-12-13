@@ -18,3 +18,14 @@ class MySQLDatabase:
             )
         except Error as e:
             print(f"Error connection to MySQL database: {e}")
+
+    def read_query(self, query):
+        cursor = self.connection.cursor()
+
+        try:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return result
+        except Error as e:
+            print(f"Error reading data: {e}")
+            return None

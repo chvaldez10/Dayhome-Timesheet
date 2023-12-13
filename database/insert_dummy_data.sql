@@ -1,3 +1,5 @@
+use DayHomeDatabase;
+
 INSERT INTO Admin (Username, Password) 
 VALUES ("spicyrice", "password");
 
