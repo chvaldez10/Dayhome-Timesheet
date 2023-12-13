@@ -1,5 +1,11 @@
-Move all CSV files in this folder.
+The scripts in this folder expect CSV file extracts from the web application named `Crafts Web App`. The workflow described below is specifically tailored for the `Crafts Web App`.
 
-Steps:
+Please copy and paste all CSV files into this folder.
 
-1. Populate the database using the populate.py
+Rename all files in the date format `yyyy-mm-dd`.
+
+Scripts:
+
+- `populate.py`: Main script for operating the database.
+- `my_sql_database.py`: Contains the MySQL database class to establish a connection with the MySQL database.
+- `csv_reader.py`: Contains the CSV Reader class to read CSV files.

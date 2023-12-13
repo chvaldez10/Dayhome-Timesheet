@@ -1,4 +1,3 @@
-# import pandas as pd
 from my_sql_database import MySQLDatabase
 import datetime
 
