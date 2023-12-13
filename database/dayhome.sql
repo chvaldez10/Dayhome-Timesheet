@@ -38,8 +38,8 @@ CREATE TABLE DailyLog(
     TotalTime FLOAT(4,2),
     Status VARCHAR(25),
     ChildrenID VARCHAR(25) NOT NULL,
-    Location VARHCAR(25),
-    HealthCheck, VARCHAR(25),
+    Location VARCHAR(25),
+    HealthCheck VARCHAR(25),
     FOREIGN KEY (ChildrenID) REFERENCES Children(ChildrenID)
 );
 
