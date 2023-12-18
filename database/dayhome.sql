@@ -1,23 +1,21 @@
 # Note: dropping the database and tables will results data loss
-CREATE DATABASE DayHomeDatabase;
 USE DayHomeDatabase;
 
 CREATE TABLE Admin(
-    AdminID INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(25),
-    Password VARCHAR(60)
+    AdminID VARCHAR(25) PRIMARY KEY,
+    Password VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE Provider(
     ProviderID VARCHAR(25) PRIMARY KEY,
-    FirstName VARCHAR(25),
-    LastName VARCHAR(25)
+    FirstName VARCHAR(25) NOT NULL,
+    LastName VARCHAR(25) NOT NULL
 );
 
 CREATE TABLE Children(
     ChildrenID VARCHAR(25) PRIMARY KEY,
-    FirstName VARCHAR(25),
-    LastName VARCHAR(25),
+    FirstName VARCHAR(25) NOT NULL,
+    LastName VARCHAR(25) NOT NULL,
     ProviderID VARCHAR(25),
     FOREIGN KEY (ProviderID) REFERENCES Provider(ProviderID)
 );
@@ -31,7 +29,6 @@ CREATE TABLE CareBy(
 );
 
 CREATE TABLE DailyLog(
-    LogID INT AUTO_INCREMENT PRIMARY KEY,
     DateEntry DATE NOT NULL,
     LoginTime TIME,
     SignOutTime TIME,
@@ -40,16 +37,17 @@ CREATE TABLE DailyLog(
     ChildrenID VARCHAR(25) NOT NULL,
     Location VARCHAR(25),
     HealthCheck VARCHAR(25),
+    PRIMARY KEY (DateEntry, ChildrenID),
     FOREIGN KEY (ChildrenID) REFERENCES Children(ChildrenID)
 );
 
 CREATE TABLE ProviderLog(
-    LogID INT AUTO_INCREMENT PRIMARY KEY,
     DateEntry DATE NOT NULL,
     LoginTime TIME,
     SignOutTime TIME,
     TotalTime FLOAT(4,2),
     Status VARCHAR(25),
     ProviderID VARCHAR(25) NOT NULL,
+    PRIMARY KEY (DateEntry),
     FOREIGN KEY (ProviderID) REFERENCES Provider(ProviderID)
 );
