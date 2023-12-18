@@ -1,4 +1,5 @@
 # Note: dropping the database and tables will results data loss
+CREATE DATABASE IF NOT EXISTS DayHomeDatabase;
 USE DayHomeDatabase;
 
 CREATE TABLE Admin(
