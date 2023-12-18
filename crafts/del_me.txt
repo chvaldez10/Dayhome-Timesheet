@@ -1,6 +1,0 @@
-child name:  Alanna Ahmed | l status:  Out | in_tine:  08:32:00 | out time:  16:55:00 | total time:  8.383333333333333 | health check:  PassedPassed
-child name:  Amanda Leigh Montes | l status:  Not Scheduled | in_tine:  None | out time:  None | total time:  None | health check:  nan
-child name:  Jaiveer Singh | l status:  Out | in_tine:  07:27:00 | out time:  16:32:00 | total time:  9.083333333333334 | health check:  PassedPassed
-child name:  Japneet Kaur | l status:  Out | in_tine:  07:27:00 | out time:  16:33:00 | total time:  9.1 | health check:  PassedPassed
-child name:  Kandace Alyssa Castelo | l status:  Out | in_tine:  07:25:00 | out time:  17:25:00 | total time:  10.0 | health check:  PassedPassed
-child name:  Matthew Ethan Ubalde | l status:  Sick | in_tine:  None | out time:  None | total time:  None | health check:  nan
