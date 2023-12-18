@@ -47,7 +47,7 @@ build/
 *.seed
 *.dump
 *.snapshot
-# ... Additional editor or OS-generated files
+*.xls
 
 # Compiled Python files
 *.pyc
