@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 from datetime import datetime
+import math
 
 TEST_CSV = "2023-12-12.csv"
 
@@ -14,16 +15,26 @@ class CSV_Reader:
 
         # drop unwanted columns
         df.drop(columns=["Unnamed: 0", "Provider", "Unnamed: 7", "Unnamed: 8"], inplace=True)
-        
+
+        daily_log = []
+
         # parse dataframe per row
         for index, row in df.iterrows():
             child_name = row["Child Name"]
             location = self.clean_location_string(row["Location/Room"])
             status = row["Status"]
             in_time, out_time, total_time = self.parse_datetime(str(row["Times"]))
-            health_check = row["Health Check"]
+            health_check = str(row["Health Check"])
 
-            print("child name: ", child_name, "| status: ", status, "| in time: ", in_time, "| out time: ", out_time, "| total time: ", total_time, "| health check: ", health_check)
+            if health_check == "nan":
+                health_check = None
+            print(type(health_check), health_check)
+            temporary_tuple = (child_name, location, status, in_time, out_time, total_time, health_check)
+
+            daily_log.append(temporary_tuple)
+        
+        for tup in daily_log:
+            print(tup,"\n", "="*50, "\n")
 
     def clean_location_string(self, location:str) -> str:
         cleaned_location_string = location.split()
