@@ -1,6 +1,6 @@
 The scripts in this folder expect CSV file extracts from the web application named `Crafts Web App`. The workflow described below is specifically tailored for the `Crafts Web App`.
 
-Please copy and paste all CSV files into this folder.
+Please copy and paste all CSV files into the csv folder.
 
 Rename all files in the date format `yyyy-mm-dd`.
 
