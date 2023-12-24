@@ -2,9 +2,6 @@ import pandas as pd
 import re
 from datetime import datetime
 import math
-
-TEST_CSV = "./csv/2023-12-12.csv"
-
 class CSV_Reader:
     def __init__(self) -> None:
         """Initialize the CSV Reader class."""
