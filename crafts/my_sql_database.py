@@ -24,10 +24,10 @@ class MySQLDatabase:
 
         try:
             self.connection = mysql.connector.connect(
-                host=os.getenv("DB_HOST"),
-                user=os.getenv("DB_USER"),
-                password=os.getenv("DB_PASSWORD"),
-                database=os.getenv("DB_DATABASE")
+                host=os.getenv("DATABASE_HOST"),
+                user=os.getenv("DATABASE_USER"),
+                password=os.getenv("DATABASE_PASSWORD"),
+                database=os.getenv("DATABASE_NAME")
             )
         except Error as e:
             print(f"Error connection to MySQL database: {e}")
