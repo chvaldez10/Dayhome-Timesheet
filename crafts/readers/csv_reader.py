@@ -42,7 +42,7 @@ class CSV_Reader:
             in_time, out_time, total_time = self.parse_datetime(str(row["Times"]))
             health_check = str(row["Health Check"]) if pd.notna(row["Health Check"]) else None
 
-            daily_log.append((csv_date,child_name, location, status, in_time, out_time, total_time, health_check))
+            daily_log.append((csv_date, child_name, location, status, in_time, out_time, total_time, health_check))
 
         return daily_log
 

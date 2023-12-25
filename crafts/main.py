@@ -1,15 +1,12 @@
 # user defined classes
-from exceptions.date_parsing_error import DateParsingError
 from exceptions.sys_arg_error import SysArgError
 from database.my_sql_database import MySQLDatabase
 from database.my_sql_queries import insert_data, read_data
 from readers.csv_reader import CSV_Reader
-from utilities.date_utilities import parse_for_valid_date
 from utilities.daily_log_utilities import generate_provider_log
 
 # python libraries
 import pandas as pd
-from datetime import datetime
 import sys
 
 # test data
@@ -27,20 +24,20 @@ COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Tim
 
 def main(provider_id: str):
     # Setup database and CSV reader
-    my_database = MySQLDatabase()
+    # my_database = MySQLDatabase()
     my_csv_reader = CSV_Reader()
 
     # Read and process the CSV file
     daily_log = my_csv_reader.read_csv(TEST_CSV)
     daily_log_df = pd.DataFrame(daily_log, columns=COLUMN_NAMES_CRAFTS)
 
-    # Set pandas display options (consider if this is really necessary for your script)
     pd.set_option("display.max_columns", None)
     pd.set_option("display.width", None)
 
     # Generate and print the provider log
     provider_log = generate_provider_log(daily_log_df, provider_id)
     print(provider_log)
+
 
 if __name__ == "__main__":
     try:
