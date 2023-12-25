@@ -28,7 +28,7 @@ if __name__ == "__main__":
     # check if csv is valid
     try:
         csv_date = parse_for_valid_date(TEST_CSV)
-        print(csv_date)
+        print(f"{csv_date}, {type(csv_date)}")
     except DateParsingError as e:
         print(f"{e}")
 

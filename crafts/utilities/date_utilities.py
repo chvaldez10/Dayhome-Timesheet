@@ -23,7 +23,7 @@ def parse_for_valid_date(date_string: str):
         date_str = date_match.group(0)
 
         try:
-            return datetime.strptime(date_str, "%Y-%m-%d")
+            return datetime.strptime(date_str, "%Y-%m-%d").date()
         except ValueError:
             raise DateParsingError(f"Invalid date format: {date_str}")
     raise DateParsingError("No matched date.")
