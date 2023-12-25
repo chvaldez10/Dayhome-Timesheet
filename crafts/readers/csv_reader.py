@@ -6,13 +6,15 @@ from exceptions.date_parsing_error import DateParsingError
 import pandas as pd
 import re
 from datetime import datetime
+from typing import Tuple, List
+
 
 class CSV_Reader:
     def __init__(self) -> None:
         """Initialize the CSV Reader class."""
         pass
 
-    def read_csv(self, csv_file: str) -> list[tuple]:
+    def read_csv(self, csv_file: str) -> List[Tuple]:
         """
         Reads a CSV file and processes its content.
         Args:
@@ -54,7 +56,7 @@ class CSV_Reader:
         """
         cleaned_location_string = [word for word in location.split() if word != "---AGENCY"]
         return " ".join(cleaned_location_string)
-    
+
     def parse_datetime(self, times: str) -> tuple:
         """
         Parses a datetime string and calculates the total time.
