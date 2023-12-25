@@ -3,8 +3,8 @@ use DayHomeDatabase;
 INSERT INTO Admin (AdminID, Password) 
 VALUES ("spicyrice", "password");
 
-INSERT INTO Provider (ProviderID, FirstName, LastName) 
-VALUES ("spicyrice001", "spicy", "rice");
+INSERT INTO Provider (ProviderID, FirstName, LastName, Location) 
+VALUES ("spicyrice001", "spicy", "rice", "ricehouse");
 
 INSERT INTO Children (ChildrenID, FirstName, LastName, ProviderID) VALUES
 ("sweetrice001", "sweet", "rice", "spicyrice001"),

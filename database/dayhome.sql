@@ -10,7 +10,8 @@ CREATE TABLE Admin(
 CREATE TABLE Provider(
     ProviderID VARCHAR(25) PRIMARY KEY,
     FirstName VARCHAR(25) NOT NULL,
-    LastName VARCHAR(25) NOT NULL
+    LastName VARCHAR(25) NOT NULL,
+    Location VARCHAR(25) NOT NULL
 );
 
 CREATE TABLE Children(
