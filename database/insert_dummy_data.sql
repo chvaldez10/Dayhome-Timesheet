@@ -27,5 +27,5 @@ VALUES
 ("2023-12-09", "Not Scheduled", "sweetrice001"),
 ("2023-12-09", "Sick", "sweetrice002");
 
-INSERT INTO ProviderLog (DateEntry, LoginTime, SignOutTime, TotalTime, Status, ProviderID) 
-VALUES ("2023-12-08", "08:00:00", "17:30:00", 9.50, "Active", "spicyrice001");
+INSERT INTO ProviderLog (DateEntry, LoginTime, SignOutTime, TotalTime, ProviderID) 
+VALUES ("2023-12-08", "08:00:00", "17:30:00", 9.50, "spicyrice001");

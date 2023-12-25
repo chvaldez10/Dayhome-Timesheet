@@ -48,7 +48,6 @@ CREATE TABLE ProviderLog(
     LoginTime TIME,
     SignOutTime TIME,
     TotalTime FLOAT(4,2) NOT NULL,
-    Status VARCHAR(25),
     ProviderID VARCHAR(25) NOT NULL,
     PRIMARY KEY (DateEntry),
     FOREIGN KEY (ProviderID) REFERENCES Provider(ProviderID)
