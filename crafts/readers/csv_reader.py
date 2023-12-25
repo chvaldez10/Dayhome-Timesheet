@@ -32,7 +32,7 @@ class CSV_Reader:
         try:
             csv_date = parse_for_valid_date(csv_file)
         except DateParsingError as e:
-            print(f"{e}")
+            raise DateParsingError(f"{e} Invalid filename.")
 
         daily_log = []
         for _, row in df.iterrows():

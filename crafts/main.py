@@ -1,5 +1,6 @@
 # user defined classes
 from exceptions.date_parsing_error import DateParsingError
+from exceptions.sys_arg_error import SysArgError
 from database.my_sql_database import MySQLDatabase
 from database.my_sql_queries import insert_data, read_data
 from readers.csv_reader import CSV_Reader
@@ -9,6 +10,7 @@ from utilities.daily_log_utilities import generate_provider_log
 # python libraries
 import pandas as pd
 from datetime import datetime
+import sys
 
 # test data
 TEST_CSV = "./csv/2023-12-12.csv"
@@ -23,22 +25,30 @@ COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Tim
 #
 ##########################################################
 
+def main(provider_id: str):
+    # Setup database and CSV reader
+    my_database = MySQLDatabase()
+    my_csv_reader = CSV_Reader()
+
+    # Read and process the CSV file
+    daily_log = my_csv_reader.read_csv(TEST_CSV)
+    daily_log_df = pd.DataFrame(daily_log, columns=COLUMN_NAMES_CRAFTS)
+
+    # Set pandas display options (consider if this is really necessary for your script)
+    pd.set_option("display.max_columns", None)
+    pd.set_option("display.width", None)
+
+    # Generate and print the provider log
+    provider_log = generate_provider_log(daily_log_df, provider_id)
+    print(provider_log)
 
 if __name__ == "__main__":
-    # my database
-    my_database = MySQLDatabase()
-
-    # my csv reader
-    my_csv_reader = CSV_Reader()
-    daily_log = my_csv_reader.read_csv(TEST_CSV)
-
-    # convert to pandas df
-    daily_log_df = pd.DataFrame(daily_log, columns=COLUMN_NAMES_CRAFTS)
-    # daily_log_df["In Time"] = pd.to_datetime(daily_log_df["In Time"], format="%H:%M:%S", errors="coerce").dt.time
-    # daily_log_df["Out Time"] = pd.to_datetime(daily_log_df["Out Time"], format="%H:%M:%S", errors="coerce").dt.time
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.width', None)
-    # print(daily_log_df.dtypes)
-    # print(daily_log_df)
-
-    generate_provider_log(daily_log_df)
+    try:
+        if len(sys.argv) > 1:
+            provider_id = sys.argv[1]
+            main(provider_id)
+        else:
+            raise SysArgError("No input provided.")
+    except SysArgError as e:
+        print(f"Error: {e}")
+        print("Usage: script.py <provider_id>")
