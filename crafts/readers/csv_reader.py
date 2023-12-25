@@ -1,7 +1,12 @@
+# user defined classes and functions
+from utilities.date_utilities import parse_for_valid_date
+from exceptions.date_parsing_error import DateParsingError
+
+# python libraries
 import pandas as pd
 import re
 from datetime import datetime
-import math
+
 class CSV_Reader:
     def __init__(self) -> None:
         """Initialize the CSV Reader class."""
@@ -22,6 +27,11 @@ class CSV_Reader:
             print(f"Error reading CSV file: {e}")
             return []
 
+        try:
+            csv_date = parse_for_valid_date(csv_file)
+        except DateParsingError as e:
+            print(f"{e}")
+
         daily_log = []
         for _, row in df.iterrows():
             child_name = row["Child Name"]
@@ -30,7 +40,7 @@ class CSV_Reader:
             in_time, out_time, total_time = self.parse_datetime(str(row["Times"]))
             health_check = str(row["Health Check"]) if pd.notna(row["Health Check"]) else None
 
-            daily_log.append((child_name, location, status, in_time, out_time, total_time, health_check))
+            daily_log.append((csv_date,child_name, location, status, in_time, out_time, total_time, health_check))
 
         return daily_log
 
@@ -63,5 +73,4 @@ class CSV_Reader:
         in_time = datetime.strptime(found_dates[0], '%I:%M %p').time()
         out_time = datetime.strptime(found_dates[1], '%I:%M %p').time()
         total_time = (datetime.combine(datetime.min, out_time) - datetime.combine(datetime.min, in_time)).seconds / 3600.0
-        
         return in_time, out_time, total_time

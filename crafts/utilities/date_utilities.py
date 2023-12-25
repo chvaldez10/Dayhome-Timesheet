@@ -4,7 +4,7 @@ from exceptions.date_parsing_error import DateParsingError
 
 DATE_PATTERN = r"\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"
 
-# util functions
+
 def parse_for_valid_date(date_string: str):
     """
     Parse the provided string for a valid date.
