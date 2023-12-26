@@ -1,24 +1,32 @@
+"""
+    main:           Used to test functional components for personalized timesheet tool.
+
+    ...
+
+    options:
+        -v:         print version (not yet implemented)
+        --version:  print version (not yet implemented)
+
+    Usage:          main.py [-v] <provider_id>
+
+    Arguments:
+        Provider Id:                   registered provider id in local database
+"""
+
 # user defined classes
 from exceptions.sys_arg_error import SysArgError
-from exceptions.date_parsing_error import DateParsingError
 from database.my_sql_database import MySQLDatabase
 from database.my_sql_queries import insert_data, read_data
+from utilities.user_input_utilities import print_usage 
 from readers.csv_reader import CSV_Reader
-from utilities.date_utilities import parse_for_valid_date
-from utilities.daily_log_utilities import generate_provider_log
 from utilities.process_file_utilities import process_file, get_csv_files
 
 # python libraries
-import os
-import pandas as pd
 import sys
-from datetime import datetime
 
 # test data
 CSV_FOLDER = "./csv"
 
-# column names 
-COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
 
 ###########################################################
 #
@@ -47,4 +55,4 @@ if __name__ == "__main__":
             raise SysArgError("No input provided.")
     except SysArgError as e:
         print(f"Error: {e}")
-        print("Usage: script.py <provider_id>")
+        print_usage(__doc__)

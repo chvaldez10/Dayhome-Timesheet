@@ -25,6 +25,7 @@ def process_file(filename: str, reader: CSV_Reader, provider_id: str):
         provider_log = generate_provider_log(daily_log_df, provider_id)
         print(daily_log_df)
         print(provider_log)
+        print("="*69, "\n")
     except DateParsingError as e:
         print(f"{e}\nInvalid filename: {filename}")
 
