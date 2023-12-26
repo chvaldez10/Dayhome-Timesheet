@@ -18,7 +18,7 @@ def generate_provider_log(daily_log_df: pd.DataFrame, user_id: str) -> Tuple:
     min_in_time = daily_log_df["In Time"].dropna().min()
     max_out_time = daily_log_df["Out Time"].dropna().max()
 
-    if (pd.isnan(min_in_time)) or pd.isnan(max_out_time):
+    if (pd.isna(min_in_time)) or pd.isna(max_out_time):
         return (date_entry, None, None, None, user_id)
     
     total_time = (datetime.combine(datetime.min, max_out_time) - datetime.combine(datetime.min, min_in_time)).total_seconds() / 3600

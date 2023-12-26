@@ -6,6 +6,7 @@ from database.my_sql_queries import insert_data, read_data
 from readers.csv_reader import CSV_Reader
 from utilities.date_utilities import parse_for_valid_date
 from utilities.daily_log_utilities import generate_provider_log
+from utilities.process_file_utilities import process_file, get_csv_files
 
 # python libraries
 import os
@@ -19,11 +20,6 @@ CSV_FOLDER = "./csv"
 # column names 
 COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
 
-# config to see all columns
-pd.set_option("display.max_columns", None)
-pd.set_option("display.width", None)
-
-
 ###########################################################
 #
 #                        Main loop
@@ -36,22 +32,10 @@ def main(provider_id: str):
     # my_database = MySQLDatabase()
     my_csv_reader = CSV_Reader()
 
-    csv_files = sorted(os.listdir(CSV_FOLDER))
+    csv_files = get_csv_files(CSV_FOLDER)
 
     for csv_file in csv_files:
-        temp_filename = os.path.join(CSV_FOLDER, csv_file)
-        print(csv_file)
-        try:
-            parse_for_valid_date(csv_file)
-        except DateParsingError as e:
-            print(f"{e}\nInvalid filename: {temp_filename}")
-        else:
-            # Read and process the CSV file
-            daily_log = my_csv_reader.read_csv(temp_filename)
-            daily_log_df = pd.DataFrame(daily_log, columns=COLUMN_NAMES_CRAFTS)
-            provider_log = generate_provider_log(daily_log_df, provider_id)
-            print(daily_log_df)
-            print(provider_log)
+        process_file(csv_file, my_csv_reader, provider_id)
 
 
 if __name__ == "__main__":
