@@ -4,21 +4,30 @@ Welcome to the Dayhome-Timesheet repository, a specialized tool designed to comp
 
 ## 🌐 Crafts Web App - Dayhome Management Tool
 
-The Crafts Web App serves as a robust dayhome management platform. While it includes a timesheet management system, it currently falls short in displaying aggregated data. This Dayhome-Timesheet tool is here to bridge that gap.
+The Crafts Web App is a robust dayhome management platform. While it includes a timesheet management system, it lacks comprehensive aggregated data display. The Dayhome-Timesheet tool aims to fill this gap.
 
 ## ⚙️ Development Phases
 
 ### Phase 1 (Current Stage)
 
-- **Objective**: Enhance data handling capabilities.
+- **Objective**: Automate data handling.
+- **Description**: Focus on migrating CSV data to a local MySQL server.
 - **Actions**:
   - Extract data from CSV files.
-  - Populate local database.
-  - Aggregate data to streamline and automate the timesheet processes.
+  - Populate the local database.
+  - Aggregate data to enhance and automate timesheet processes.
 
-### Phase 2 (Upcoming)
+### Phase 2
 
-- **Objective**: Enhance user experience and accessibility.
+- **Objective**: Migrate Data to cloud service.
+- **Description**: Aim to migrate all local data to a cloud service like Supabase for multi-machine accessibility.
 - **Actions**:
-  - Develop a client-facing web application.
-  - Display results in an intuitive and user-friendly interface.
+  - Replicate MySQL database to Supabase.
+
+### Phase 3
+
+- **Objective**: Improve user experience and accessibility.
+- **Description**: Focus on developing a user-friendly web interface.
+- **Actions**:
+  - Create a client-facing web application.
+  - Present results in an intuitive, user-friendly interface.
