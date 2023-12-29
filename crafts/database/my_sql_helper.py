@@ -13,4 +13,5 @@ USERNAMES = load_json(USER_FILENAME)
 def insert_to_daily_log_table(provider_log_df: pd.DataFrame, column_names: List[str]) -> None:
     for index, row in provider_log_df.iterrows():
         data_to_insert = tuple(row[column_name] for column_name in column_names)
-        print(data_to_insert)
+        insert_data(data_to_insert)
+        break
