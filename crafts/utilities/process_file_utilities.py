@@ -12,11 +12,7 @@ import os
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", None)
 
-# column names 
-COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
-
-
-def process_file(filename: str, reader: CSV_Reader) -> Optional[pd.DataFrame]:
+def process_file(filename: str, reader: CSV_Reader, column_names: List[str]) -> Optional[pd.DataFrame]:
     """
     Process each CSV file: read, convert to DataFrame, and generate logs.
     :param filename: The name of the file to process.
@@ -26,7 +22,7 @@ def process_file(filename: str, reader: CSV_Reader) -> Optional[pd.DataFrame]:
     try:
         parse_for_valid_date(filename)  # Validate date or filename
         daily_log = reader.read_csv(filename)
-        daily_log_df = pd.DataFrame(daily_log, columns=COLUMN_NAMES_CRAFTS)
+        daily_log_df = pd.DataFrame(daily_log, columns=column_names)
         print(daily_log_df)
         return daily_log_df
     except DateParsingError as e:

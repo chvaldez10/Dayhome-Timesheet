@@ -16,18 +16,19 @@
 # user defined classes
 from exceptions.sys_arg_error import SysArgError
 from database.my_sql_database import MySQLDatabase
-from database.my_sql_queries import insert_data, read_data
+from database.my_sql_helper import insert_to_daily_log_table
 from utilities.user_input_utilities import print_usage 
 from readers.csv_reader import CSV_Reader
-from readers.json_reader import load_json
 from utilities.process_file_utilities import process_file, get_csv_files, get_provider_log
 
 # python libraries
 import sys
 
-# test data
+# data
 CSV_FOLDER = "./csv"
 
+# column names 
+COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
 
 ###########################################################
 #
@@ -40,14 +41,13 @@ def main(provider_id: str):
     # Setup database and CSV reader
     my_database = MySQLDatabase()
     my_csv_reader = CSV_Reader()
-
     csv_files = get_csv_files(CSV_FOLDER)
 
     for csv_file in csv_files:
-        daily_log_df = process_file(csv_file, my_csv_reader)
+        daily_log_df = process_file(csv_file, my_csv_reader, COLUMN_NAMES_CRAFTS)
         provider_log = get_provider_log(daily_log_df, provider_id)
+        insert_to_daily_log_table(daily_log_df, COLUMN_NAMES_CRAFTS)
         print("="*130, "\n")
-
         break
 
 
