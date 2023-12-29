@@ -32,3 +32,10 @@ def insert_to_daily_log_table(database: MySQLDatabase, provider_log_df: pd.DataF
             insert_data(database, insert_query, tuple(data_to_insert))
         except Exception as e:
             print(f"Error inserting data: {e}")
+
+def insert_to_provider_log(database: MySQLDatabase, data_to_insert: Tuple) -> None:
+    insert_query = "INSERT INTO ProviderLog (DateEntry, SignInTime, SignOutTime, TotalTime, ProviderID) VALUES (%s, %s, %s, %s, %s)"
+    try:
+        insert_data(database, insert_query, tuple(data_to_insert))
+    except Exception as e:
+        print(f"Error inserting data: {e}")

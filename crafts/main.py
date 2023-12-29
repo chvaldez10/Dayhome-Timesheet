@@ -16,7 +16,7 @@
 # user defined classes
 from exceptions.sys_arg_error import SysArgError
 from database.my_sql_database import MySQLDatabase
-from database.my_sql_helper import insert_to_daily_log_table
+from database.my_sql_helper import insert_to_daily_log_table, insert_to_provider_log
 from utilities.user_input_utilities import print_usage 
 from readers.csv_reader import CSV_Reader
 from utilities.process_file_utilities import process_file, get_csv_files, get_provider_log
@@ -30,7 +30,7 @@ CSV_FOLDER = "./csv"
 # column names 
 COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
 
-COLUMN_NAMES_PROVIDER_LOG = ["Date Entry", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
+COLUMN_NAMES_DAILY_LOG = ["Date Entry", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
 
 ###########################################################
 #
@@ -47,8 +47,9 @@ def main(provider_id: str):
   
     for csv_file in csv_files:
         daily_log_df = process_file(csv_file, my_csv_reader, COLUMN_NAMES_CRAFTS)
-        # provider_log = get_provider_log(daily_log_df, provider_id)
-        insert_to_daily_log_table(my_database, daily_log_df, COLUMN_NAMES_PROVIDER_LOG)
+        provider_log = get_provider_log(daily_log_df, provider_id)
+        # insert_to_daily_log_table(my_database, daily_log_df, COLUMN_NAMES_DAILY_LOG)
+        insert_to_provider_log(my_database, provider_log)
         print("="*130, "\n")
 
 
