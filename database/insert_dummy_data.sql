@@ -22,10 +22,10 @@ INSERT INTO DailyLog (DateEntry, SignInTime, SignOutTime, TotalTime, Status, Chi
 ("2023-12-08", "08:00:00", "16:00:00", 8, "Attendance Recorded", "sweetrice002")
 ;
 
-INSERT INTO DailyLog (DateEntry, Status, ChildrenID) 
+INSERT INTO DailyLog (DateEntry, Status, TotalTime, ChildrenID) 
 VALUES
-("2023-12-09", "Not Scheduled", "sweetrice001"),
-("2023-12-09", "Sick", "sweetrice002");
+("2023-12-09", "Not Scheduled", 0, "sweetrice001"),
+("2023-12-09", "Sick", 0, "sweetrice002");
 
 INSERT INTO ProviderLog (DateEntry, SignInTime, SignOutTime, TotalTime, ProviderID) 
 VALUES ("2023-12-08", "08:00:00", "17:30:00", 9.50, "spicyrice001");
