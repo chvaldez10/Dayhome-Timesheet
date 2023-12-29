@@ -1,1 +1,3 @@
-Put CSV files in here.
+Copy CSV files here with the format `yyyy-mm-dd`.csv.
+
+Any other filenames are ignored.

@@ -1,0 +1,1 @@
+Create a JSON file called `users.json` to map CSV names to a username in the database.
