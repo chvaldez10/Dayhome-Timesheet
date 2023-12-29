@@ -1,4 +1,5 @@
-from database.my_sql_queries import insert_data, read_data
+from database.my_sql_queries import insert_data
+from database.my_sql_database import MySQLDatabase
 from readers.json_reader import load_json
 
 # python packages
@@ -7,11 +8,27 @@ from typing import Tuple, List
 
 # json data
 USER_FILENAME = "./json/users.json"
-USERNAMES = load_json(USER_FILENAME)
+CHILD_ID_MAP = load_json(USER_FILENAME)
 
 
-def insert_to_daily_log_table(provider_log_df: pd.DataFrame, column_names: List[str]) -> None:
+def insert_to_daily_log_table(database: MySQLDatabase, provider_log_df: pd.DataFrame, column_names: List[str]) -> None:
+    """
+    Inserts log entries from the dataframe to the DailyLog table in the database.
+
+    Args:
+        database (MySQLDatabase): The database connection object.
+        provider_log_df (pd.DataFrame): The dataframe containing log data to insert.
+        column_names (List[str]): List of column names to be inserted in order.
+
+    Returns:
+        None: Function does not return anything.
+    """
+    insert_query = "INSERT INTO DailyLog (DateEntry, Location, Status, SignInTime, SignOutTime, TotalTime, HealthCheck, ChildrenID) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
     for index, row in provider_log_df.iterrows():
-        data_to_insert = tuple(row[column_name] for column_name in column_names)
-        insert_data(data_to_insert)
-        break
+        data_to_insert = [row[column_name] for column_name in column_names]
+        child_id = CHILD_ID_MAP.get(row['Child Name'], None)
+        data_to_insert.append(child_id)
+        try:
+            insert_data(database, insert_query, tuple(data_to_insert))
+        except Exception as e:
+            print(f"Error inserting data: {e}")

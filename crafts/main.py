@@ -30,6 +30,8 @@ CSV_FOLDER = "./csv"
 # column names 
 COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
 
+COLUMN_NAMES_PROVIDER_LOG = ["Date Entry", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
+
 ###########################################################
 #
 #                        Main loop
@@ -42,13 +44,12 @@ def main(provider_id: str):
     my_database = MySQLDatabase()
     my_csv_reader = CSV_Reader()
     csv_files = get_csv_files(CSV_FOLDER)
-
+  
     for csv_file in csv_files:
         daily_log_df = process_file(csv_file, my_csv_reader, COLUMN_NAMES_CRAFTS)
-        provider_log = get_provider_log(daily_log_df, provider_id)
-        insert_to_daily_log_table(daily_log_df, COLUMN_NAMES_CRAFTS)
+        # provider_log = get_provider_log(daily_log_df, provider_id)
+        insert_to_daily_log_table(my_database, daily_log_df, COLUMN_NAMES_PROVIDER_LOG)
         print("="*130, "\n")
-        break
 
 
 if __name__ == "__main__":

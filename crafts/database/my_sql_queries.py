@@ -1,21 +1,24 @@
 from database.my_sql_database import MySQLDatabase
 from typing import List, Any
 
-def insert_data(database: MySQLDatabase, data: tuple) -> None:
+def insert_data(database: MySQLDatabase, query: str, data: tuple) -> None:
     """
-    Inserts data into the DailyLog table of the database.
+    Inserts data into a table of the database using the provided query.
 
     Args:
         database (MySQLDatabase): The database connection object.
+        query (str): SQL query string.
         data (tuple): A tuple containing all necessary data to be inserted.
 
     Returns:
-        None: Indicates the data was inserted, relies on the database.execute_query method.
+        None: Indicates the function does not return anything.
     """
-    insert_query = "INSERT INTO DailyLog (DateEntry, LoginTime, SignOutTime, TotalTime, Status, ChildrenID) VALUES (%s, %s, %s, %s, %s, %s)"
-    database.execute_query(insert_query, data)
+    try:
+        database.execute_query(query, data)
+    except Exception as e:
+        print(f"Error executing query: {e}")
 
-def read_data(database: MySQLDatabase) -> List[Any]:
+def read_data(database: MySQLDatabase, query: str) -> List[Any]:
     """
     Reads all data from the DailyLog table of the database.
 
@@ -25,5 +28,8 @@ def read_data(database: MySQLDatabase) -> List[Any]:
     Returns:
         List[Any]: A list of tuples containing the rows of DailyLog table.
     """
-    read_query = "SELECT * FROM DailyLog"
-    return database.read_query(read_query)
+    try:
+        return database.read_query(query)
+    except Exception as e:
+        print(f"Error executing query: {e}")
+        return None
