@@ -5,7 +5,7 @@ from utilities.daily_log_utilities import generate_provider_log
 
 # python packages
 import pandas as pd
-from typing import List
+from typing import List, Tuple
 import os
 
 # config to see all columns
@@ -16,18 +16,24 @@ pd.set_option("display.width", None)
 COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
 
 
-def process_file(filename: str, reader: CSV_Reader, provider_id: str):
+def process_file(filename: str, reader: CSV_Reader) -> pd.DataFrame:
     """Process each CSV file: read, convert to DataFrame, and generate logs."""
     try:
         parse_for_valid_date(filename)  # Validate date or filename
         daily_log = reader.read_csv(filename)
         daily_log_df = pd.DataFrame(daily_log, columns=COLUMN_NAMES_CRAFTS)
-        provider_log = generate_provider_log(daily_log_df, provider_id)
         print(daily_log_df)
+        return daily_log_df
+        provider_log = generate_provider_log(daily_log_df, provider_id)
         print(provider_log)
-        print("="*69, "\n")
     except DateParsingError as e:
         print(f"{e}\nInvalid filename: {filename}")
+
+
+def get_provider_log(daily_log_df: pd.DataFrame, provider_id: str) -> Tuple:
+    provider_log = generate_provider_log(daily_log_df, provider_id)
+    print(provider_log)
+    return provider_log
 
 
 def get_csv_files(folder_path: str) -> List[str]:
