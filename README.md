@@ -8,7 +8,7 @@ The Crafts Web App is a robust dayhome management platform. While it includes a 
 
 ## ⚙️ Development Phases
 
-### Phase 1 (Current Stage)
+### Phase 1 (Improvement Stage)
 
 - **Objective**: Automate data handling.
 - **Description**: Focus on migrating CSV data to a local MySQL server.
@@ -17,14 +17,14 @@ The Crafts Web App is a robust dayhome management platform. While it includes a 
   - Populate the local database.
   - Aggregate data to enhance and automate timesheet processes.
 
-### Phase 2
+### Phase 2 (Current Stage)
 
 - **Objective**: Migrate Data to cloud service.
 - **Description**: Aim to migrate all local data to a cloud service like Supabase for multi-machine accessibility.
 - **Actions**:
   - Replicate MySQL database to Supabase.
 
-### Phase 3
+### Phase 3 (Started)
 
 - **Objective**: Improve user experience and accessibility.
 - **Description**: Focus on developing a user-friendly web interface.
