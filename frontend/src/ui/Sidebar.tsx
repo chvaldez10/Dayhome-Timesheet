@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import Logo from "./Logo";
 
 function Sidebar() {
   return <div>Sidebar</div>;
