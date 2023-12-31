@@ -28,4 +28,8 @@ const Heading = styled.h1<HeadingProps>`
     line-height: 1.4;
 `;
 
+Heading.defaultProps = {
+  as: "h1",
+};
+
 export default Heading;

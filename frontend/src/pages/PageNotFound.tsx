@@ -1,7 +1,7 @@
-import React from "react";
+import Heading from "../ui/Heading";
 
 function PageNotFound() {
-  return <div>PageNotFound</div>;
+  return <Heading as="h1">Page Not Found</Heading>;
 }
 
 export default PageNotFound;

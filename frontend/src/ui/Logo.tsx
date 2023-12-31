@@ -5,14 +5,13 @@ const StyledLogo = styled.div`
 `;
 
 const Img = styled.img`
-  height: 9.6rem;
   width: auto;
 `;
 
 function Logo() {
   return (
     <StyledLogo>
-      <Img src="/radiance-logo.png" />
+      <Img src="/radiance-logo-no-bg.png" />
     </StyledLogo>
   );
 }

@@ -1,7 +1,7 @@
-import React from "react";
+import Heading from "../ui/Heading";
 
 function About() {
-  return <div>About</div>;
+  return <Heading>About</Heading>;
 }
 
 export default About;

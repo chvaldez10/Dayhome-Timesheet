@@ -1,7 +1,7 @@
-import React from "react";
+import Heading from "../ui/Heading";
 
 function ClassList() {
-  return <div>ClassList</div>;
+  return <Heading>Class List</Heading>;
 }
 
 export default ClassList;
