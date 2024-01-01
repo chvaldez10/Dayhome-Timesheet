@@ -10,7 +10,7 @@ class MySQLDatabase:
     A Data Access Object (DAO) class for managing interactions with a MySQL database.
 
     This class abstracts and encapsulates all access to the data source, providing
-    methods to execute and read SQL queries. 
+    methods to execute and read SQL queries.
 
     Methods:
         __init__: Initializes the database connection.
