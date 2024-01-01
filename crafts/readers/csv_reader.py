@@ -35,13 +35,13 @@ class CSV_Reader:
             raise DateParsingError(f"{e} Invalid filename.")
 
         daily_log = []
+
         for _, row in df.iterrows():
             child_name = row["Child Name"]
             location = self.clean_location_string(row["Location/Room"])
             status = row["Status"]
             in_time, out_time, total_time = self.parse_datetime(str(row["Times"]))
             health_check = str(row["Health Check"]) if pd.notna(row["Health Check"]) else None
-
             daily_log.append((csv_date, child_name, location, status, in_time, out_time, total_time, health_check))
 
         return daily_log

@@ -11,12 +11,6 @@ INSERT INTO Children (ChildrenID, FirstName, LastName, ProviderID) VALUES
 ("sweetrice002", "sweet", "rice", "spicyrice001")
 ;
 
-INSERT INTO CareBy (ProviderID, ChildrenID) 
-VALUES
-("spicyrice001", "sweetrice001"),
-("spicyrice001", "sweetrice002")
-;
-
 INSERT INTO DailyLog (DateEntry, SignInTime, SignOutTime, TotalTime, Status, ChildrenID) VALUES
 ("2023-12-08", "08:13:00", "17:15:00", 9.03, "Attendance Recorded", "sweetrice001"),
 ("2023-12-08", "08:00:00", "16:00:00", 8, "Attendance Recorded", "sweetrice002")

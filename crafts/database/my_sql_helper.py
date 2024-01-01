@@ -23,7 +23,9 @@ def insert_to_daily_log_table(database: MySQLDatabase, provider_log_df: pd.DataF
     Returns:
         None: Function does not return anything.
     """
+
     insert_query = "INSERT INTO DailyLog (DateEntry, Location, Status, SignInTime, SignOutTime, TotalTime, HealthCheck, ChildrenID) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+    
     for index, row in provider_log_df.iterrows():
         data_to_insert = [row[column_name] for column_name in column_names]
         child_id = CHILD_ID_MAP.get(row['Child Name'], None)

@@ -4,7 +4,7 @@ USE DayHomeDatabase;
 
 CREATE TABLE Admin(
     AdminID VARCHAR(25) PRIMARY KEY,
-    Password VARCHAR(60) NOT NULL
+    Password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Provider(
@@ -20,14 +20,6 @@ CREATE TABLE Children(
     LastName VARCHAR(25) NOT NULL,
     ProviderID VARCHAR(25),
     FOREIGN KEY (ProviderID) REFERENCES Provider(ProviderID)
-);
-
-CREATE TABLE CareBy(
-    ProviderID VARCHAR(25),
-    ChildrenID VARCHAR(25),
-    PRIMARY KEY (ProviderID, ChildrenID),
-    FOREIGN KEY (ProviderID) REFERENCES Provider(ProviderID),
-    FOREIGN KEY (ChildrenID) REFERENCES Children(ChildrenID)
 );
 
 CREATE TABLE DailyLog(
@@ -52,3 +44,7 @@ CREATE TABLE ProviderLog(
     PRIMARY KEY (DateEntry, ProviderID),
     FOREIGN KEY (ProviderID) REFERENCES Provider(ProviderID)
 );
+
+# Indexes for optimization
+CREATE INDEX idx_dailylog_childrenid ON DailyLog (ChildrenID);
+CREATE INDEX idx_providerlog_providerid ON ProviderLog (ProviderID);

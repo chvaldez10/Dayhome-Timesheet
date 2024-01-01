@@ -38,7 +38,7 @@ class MySQLDatabase:
 
         Args:
             query: MySQL command
-            data: data to inser
+            data: data to insert
 
         Returns:
             True for successful query. Otherwise, return false.
