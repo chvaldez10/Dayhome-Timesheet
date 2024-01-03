@@ -9,7 +9,7 @@
         -q, --query:           query database (takes an additional argument)
         -e, --export:          export to CSV file (takes an additional argument)
 
-    Usage:          main.py [-v] [-p] [-q QUERY] [-e EXPORT] <provider_id>
+    Usage:          main.py <provider_id> [-v] [-p] [-q QUERY] [-e EXPORT]
 
     Arguments:
         Provider Id:                   registered provider id in local database
@@ -18,6 +18,7 @@
 # user defined classes
 from utilities.user_input_utilities import print_usage
 from callers.populate_database import populate_database
+from callers.export_database import export_database
 
 # python libraries
 import argparse
@@ -42,8 +43,8 @@ def main() -> None:
     parser.add_argument("provider_id", metavar="provider_id", type=str, help="registered provider id in local database")
     parser.add_argument("-v", "--version", action="store_true", help="print version number and exit")
     parser.add_argument("-p", "--populate", action="store_true", help="populate database with data from CSV files")
-    parser.add_argument("-q", "--query", help="query database by month")
-    parser.add_argument("-e", "--export", help="export to CSV file by month")
+    parser.add_argument("-q", "--query", help="query database by month (not yet implemented)")
+    parser.add_argument("-e", "--export", nargs="+", help="export to CSV file by month (not yet implemented)")
 
     args = parser.parse_args()
 
@@ -56,7 +57,10 @@ def main() -> None:
         populate_database(args.provider_id)
 
     if args.export:
-        print(args.export)
+        filename = args.export[0]
+        year_month = args.export[1]
+
+        export_database(filename, year_month)
 
     if args.query:
         print(args.query)
