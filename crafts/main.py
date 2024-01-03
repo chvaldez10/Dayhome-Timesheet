@@ -17,7 +17,7 @@
 
 # user defined classes
 from utilities.user_input_utilities import print_usage
-from utilities.populate_database_utilities import populate_database
+from callers.populate_database import populate_database
 
 # python libraries
 import argparse
