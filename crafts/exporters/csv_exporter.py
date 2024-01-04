@@ -15,6 +15,12 @@ class MonthlyCalendar:
         self.first_day_of_the_month = self.date_range[0].dayofweek
         self.calendar_df = None
 
+    def set_year(self, year: int) -> None:
+        self.year = year
+
+    def set_month(self, month: int) -> None:
+        self.month = month
+
     def get_date_range(self) -> pd.DatetimeIndex:
         """Generate the date range for the month."""
         start_date = f"{self.year}-{self.month:02d}-01"
@@ -54,10 +60,3 @@ class MonthlyCalendar:
             self.calendar_df.to_csv(filename)
         else:
             print("No calendar data found")
-
-my_calendar = MonthlyCalendar(2024, 1)
-my_calendar.generate_calendar()
-my_calendar.print_calendar()
-my_calendar.populate_calendar()
-my_calendar.print_calendar()
-my_calendar.export_csv("calendar.csv")

@@ -58,9 +58,10 @@ def main() -> None:
 
     if args.export:
         filename = args.export[0]
-        year_month = args.export[1]
+        year = int(args.export[1])
+        month = int(args.export[2])
 
-        export_database(filename, year_month)
+        export_database(filename, year, month)
 
     if args.query:
         print(args.query)
