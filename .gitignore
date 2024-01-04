@@ -197,3 +197,4 @@ database/populate.sql
 del_me.txt
 users.json
 queries.sql
+del_me.*
