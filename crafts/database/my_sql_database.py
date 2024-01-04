@@ -57,7 +57,7 @@ class MySQLDatabase:
             print(f"Error executing data: {e}")
             return False
 
-    def read_query(self, query) -> list:
+    def read_query(self, query, data) -> list:
         """
         Queries data from database.
 
@@ -71,7 +71,7 @@ class MySQLDatabase:
         cursor = self.connection.cursor()
 
         try:
-            cursor.execute(query)
+            cursor.execute(query, data)
             result = cursor.fetchall()
             return result
         except Error as e:

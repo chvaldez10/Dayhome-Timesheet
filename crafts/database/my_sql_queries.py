@@ -18,7 +18,7 @@ def insert_data(database: MySQLDatabase, query: str, data: tuple) -> None:
     except Exception as e:
         print(f"Error executing query: {e}")
 
-def read_data(database: MySQLDatabase, query: str) -> List[Any]:
+def read_data(database: MySQLDatabase, query: str, data: tuple) -> List[Any]:
     """
     Reads all data from the DailyLog table of the database.
 
@@ -29,7 +29,7 @@ def read_data(database: MySQLDatabase, query: str) -> List[Any]:
         List[Any]: A list of tuples containing the rows of DailyLog table.
     """
     try:
-        return database.read_query(query)
+        return database.read_query(query, data)
     except Exception as e:
         print(f"Error executing query: {e}")
         return None

@@ -42,11 +42,12 @@ def insert_to_provider_log(database: MySQLDatabase, data_to_insert: Tuple) -> No
     except Exception as e:
         print(f"Error inserting data: {e}")
 
-def query_for_daily_entry(database: MySQLDatabase, user_id: str, year: int, month: int) -> Optional[Tuple]:
-    query_string = f"SELECT SignInTime, SignOutTime, TotalTime FROM DailyLog WHERE ChildrenID = '{user_id}' AND YEAR(DateEntry) = {year} AND MONTH(DateEntry) = {month}"
+def query_for_daily_entry(database: MySQLDatabase, user_id: str, year: int, month: int, day:int) -> Optional[Tuple]:
+    query_string = "SELECT SignInTime, SignOutTime, TotalTime FROM DailyLog WHERE ChildrenID = %s AND YEAR(DateEntry) = %s AND MONTH(DateEntry) = %s AND DAY(DateEntry) = %s"
+    params = (user_id, year, month, day)
 
     try:
-        return read_data(database, query_string)
+        return read_data(database, query_string, params)
     except Exception as e:
         print(f"Error executing query: {e}")
         return None
