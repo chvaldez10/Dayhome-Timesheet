@@ -1,10 +1,10 @@
-from database.my_sql_queries import insert_data
+from database.my_sql_queries import insert_data, read_data
 from database.my_sql_database import MySQLDatabase
 from readers.json_reader import load_json
 
 # python packages
 import pandas as pd
-from typing import Tuple, List
+from typing import Tuple, List, Optional
 
 # json data
 USER_FILENAME = "./json/users.json"
@@ -41,3 +41,12 @@ def insert_to_provider_log(database: MySQLDatabase, data_to_insert: Tuple) -> No
         insert_data(database, insert_query, tuple(data_to_insert))
     except Exception as e:
         print(f"Error inserting data: {e}")
+
+def query_for_daily_entry(database: MySQLDatabase, user_id: str, year: int, month: int) -> Optional[Tuple]:
+    query_string = f"SELECT SignInTime, SignOutTime, TotalTime FROM DailyLog WHERE ChildrenID = '{user_id}' AND YEAR(DateEntry) = {year} AND MONTH(DateEntry) = {month}"
+
+    try:
+        return read_data(database, query_string)
+    except Exception as e:
+        print(f"Error executing query: {e}")
+        return None
