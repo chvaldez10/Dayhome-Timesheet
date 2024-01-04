@@ -1,41 +1,48 @@
 import pandas as pd
+import numpy as np
+class MonthlyCalendar:
+    def __init__(self, year, month) -> None:
+        self.year = year
+        self.month = month
+        self.date_range = self.get_date_range()
+        self.first_day_of_the_month = self.date_range[0].dayofweek
+        self.calendar_df = None
 
-# Define your month and year
-year = 2024
-month = 1
+    def get_date_range(self) -> pd.DatetimeIndex:
+        start_date = f"{self.year}-{self.month:02d}-01"
+        end_date = pd.to_datetime(start_date) + pd.offsets.MonthEnd(0)
+        return pd.date_range(start=start_date, end=end_date)
 
-# Create a date range for the entire month
-# The start is the first of the month
-start_date = f"{year}-{month:02d}-01"
-# The end is the start date plus one month, minus one day
-end_date = pd.to_datetime(start_date) + pd.offsets.MonthEnd(0)
+    def generate_calendar(self) -> pd.DataFrame:
+        num_days = len(self.date_range)
+        num_weeks = (self.first_day_of_the_month + num_days - 1) // 7 + 1
+        self.calendar_df = pd.DataFrame(
+            columns=["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            index=(range(1, num_weeks + 1))
+        )
 
-date_range = pd.date_range(start=start_date, end=end_date)
+    def populate_calendar(self) -> None:
+        for date in self.date_range:
+            week_of_month = (date.day + self.first_day_of_the_month - 1) // 7 + 1
+            day_of_week = date.strftime('%A')
+            self.calendar_df.at[week_of_month, day_of_week] = date.strftime("%m/%d")
+        
+        self.calendar_df.fillna("")
 
-# Find out the day of the week for the first day of the month
-start_day_of_week = date_range[0].dayofweek
+    def print_calendar(self) -> None:
+        if self.calendar_df is not None:
+            print(self.calendar_df)
+        else:
+            print("No calendar data found")
 
-# Initialize an empty DataFrame
-# The DataFrame has the number of rows depending on the number of days and start day
-num_days = len(date_range)
-num_weeks = (start_day_of_week + num_days - 1) // 7 + 1
-calendar_df = pd.DataFrame(index=range(1, num_weeks + 1),
-                           columns=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+    def export_csv(self, filename:str) -> None:
+        if self.calendar_df is not None:
+            self.calendar_df.to_csv(filename)
+        else:
+            print("No calendar data found")
 
-# Populate the DataFrame with the actual dates
-for date in date_range:
-    # Calculate the week number
-    week_of_month = (date.day + start_day_of_week - 1) // 7 + 1
-    # Get the day name
-    day_of_week = date.strftime('%A')
-    # Insert the date into the DataFrame
-    calendar_df.at[week_of_month, day_of_week] = date.strftime('%m/%d')
-
-# Replace NaN values with empty strings or some placeholder
-calendar_df = calendar_df.fillna('')
-
-# Export to CSV
-calendar_csv_path = 'calendar.csv'
-calendar_df.to_csv(calendar_csv_path)
-
-print(f"Calendar CSV has been created at: {calendar_csv_path}")
+my_calendar = MonthlyCalendar(2024, 1)
+my_calendar.generate_calendar()
+my_calendar.print_calendar()
+my_calendar.populate_calendar()
+my_calendar.print_calendar()
