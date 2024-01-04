@@ -1,5 +1,9 @@
 import pandas as pd
 import numpy as np
+
+DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+ENTRY_INDICES = ["In", "Out", "Total"]
+
 class MonthlyCalendar:
     def __init__(self, year, month) -> None:
         self.year = year
@@ -16,16 +20,23 @@ class MonthlyCalendar:
     def generate_calendar(self) -> pd.DataFrame:
         num_days = len(self.date_range)
         num_weeks = (self.first_day_of_the_month + num_days - 1) // 7 + 1
+        week_indices = range(1, num_weeks)
+
+        multi_index = pd.MultiIndex.from_product([week_indices, ENTRY_INDICES], names=["Week", "Entry"])
+
         self.calendar_df = pd.DataFrame(
-            columns=["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            index=(range(1, num_weeks + 1))
+            columns=DAYS_OF_WEEK,
+            index=multi_index
         )
 
     def populate_calendar(self) -> None:
         for date in self.date_range:
             week_of_month = (date.day + self.first_day_of_the_month - 1) // 7 + 1
             day_of_week = date.strftime('%A')
-            self.calendar_df.at[week_of_month, day_of_week] = date.strftime("%m/%d")
+            self.calendar_df.loc[(week_of_month, "In"), day_of_week] = "8:00 AM"
+            self.calendar_df.loc[(week_of_month, "Out"), day_of_week] = "5:00 PM"
+            self.calendar_df.loc[(week_of_month, "Total"), day_of_week] = "8"
+            # self.calendar_df.at[week_of_month, day_of_week] = date.strftime("%m/%d")
         
         self.calendar_df.fillna("")
 
@@ -46,3 +57,4 @@ my_calendar.generate_calendar()
 my_calendar.print_calendar()
 my_calendar.populate_calendar()
 my_calendar.print_calendar()
+my_calendar.export_csv("calendar.csv")
