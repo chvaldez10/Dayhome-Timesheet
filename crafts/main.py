@@ -23,27 +23,18 @@ from callers.export_database import export_database
 # python libraries
 import argparse
 
-# data
-CSV_FOLDER = "./csv"
-
-# column names
-COLUMN_NAMES_CRAFTS = ["Date Entry", "Child Name", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
-
-COLUMN_NAMES_DAILY_LOG = ["Date Entry", "Location", "Status", "In Time", "Out Time", "Total Time", "Health Record"]
-
 ###########################################################
 #
 #                        Main loop
 #
 ##########################################################
 
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="Process daily log files for a provider.")
     parser.add_argument("provider_id", metavar="provider_id", type=str, help="registered provider id in local database")
     parser.add_argument("-v", "--version", action="store_true", help="print version number and exit")
     parser.add_argument("-p", "--populate", action="store_true", help="populate database with data from CSV files")
-    parser.add_argument("-t", "--total", nargs="+", help="query total time summary")
+    parser.add_argument("-s", "--summary", nargs="+", help="query daily summary")
     parser.add_argument("-e", "--export", nargs="+", help="export to CSV file by month")
 
     args = parser.parse_args()
@@ -62,12 +53,9 @@ def main() -> None:
 
         export_database(args.provider_id, year, month)
 
-    if args.total:
-        year = int(args.total[0])
-        month = int(args.total[1])
-
-        print(year, month)
-
+    if args.summary:
+        year = int(args.summary[0])
+        month = int(args.summary[1])
 
 if __name__ == "__main__":
     try:
