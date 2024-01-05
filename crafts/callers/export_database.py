@@ -21,6 +21,7 @@ def export_database(provider_id:str, year: int, month: int) -> None:
 
     for user, user_id in USER_ID_MAP.items():
         export_user_data(user, user_id, year, month, "DailyLog", "ChildrenID")
+        exit()
     
     export_user_data("Provider", provider_id, year, month, "ProviderLog", "ProviderID")
 
@@ -61,9 +62,15 @@ def process_days_and_export(user: str, user_id: str, database: MySQLDatabase, ca
         day_of_week = date.strftime("%A")
         daily_entry = query_for_daily_entry(database, user_id, date.year, date.month, date.day, table_name, id_name)
 
+        print(f"{date.year}-{date.month}-{date.day}")
+
         # Update calendar or log warning for missing entry
         if daily_entry:
             in_time, out_time, total_time = daily_entry[0]
+            print(daily_entry)
+            if in_time:
+                print(type(in_time))
+                in_time = in_time.strftime("%I:%M:%p")
             calendar.update_calendar(week_of_month, day_of_week, in_time, out_time, total_time)
         else:
             logging.warning(f"No entry found for user {user} on {date}")
