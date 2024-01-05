@@ -57,8 +57,9 @@ def main() -> None:
     if args.summary:
         year = int(args.summary[0])
         month = int(args.summary[1])
+        day = int(args.summary[2])
 
-        summarize_month(args.provider_id, year, month)
+        summarize_month(args.provider_id, year, month, day)
 
 if __name__ == "__main__":
     try:

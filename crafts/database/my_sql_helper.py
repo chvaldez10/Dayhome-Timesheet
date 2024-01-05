@@ -67,3 +67,28 @@ def query_for_daily_entry(database: MySQLDatabase, user_id: str, year: int, mont
     except Exception as e:
         logging.error(f"Error executing query: {e}")
         return None
+    
+def query_for_daily_total(database: MySQLDatabase, user_id: str, year: int, month: int, day:int, table_name: str, id_name: str):
+    """
+    Query the database for the daily total of a user or provider on a specific day.
+
+    Args:
+        database: An instance of MySQLDatabase.
+        user_id: The unique identifier for the user or provider.
+        year: The year of the record.
+        month: The month of the record.
+        day: The day of the record.
+        table_name: The name of the table to query data from.
+        id_name: The column name of the user or provider ID in the database.
+
+    Returns:
+        A tuple of SignInTime, SignOutTime, TotalTime if entry exists; None otherwise.
+    """
+    query_string = f"SELECT TotalTime FROM {table_name} WHERE {id_name} = %s AND YEAR(DateEntry) = %s AND MONTH(DateEntry) = %s AND DAY(DateEntry) = %s"
+    params = (user_id, year, month, day)
+
+    try:
+        return read_data(database, query_string, params)
+    except Exception as e:
+        logging.error(f"Error executing query: {e}")
+        return None
