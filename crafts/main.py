@@ -4,10 +4,10 @@
     ...
 
     options:
-        -v, --version:         print version (not yet implemented)
-        -p, --populate:        populate database
-        -q, --query:           query database (takes an additional argument)
         -e, --export:          export to CSV file (takes an additional argument)
+        -p, --populate:        populate database
+        -s, --summary:         summarize monthly data(takes an additional argument)
+        -v, --version:         print version
 
     Usage:          main.py <provider_id> [-v] [-p] [-q QUERY] [-e EXPORT]
 
@@ -19,6 +19,7 @@
 from utilities.user_input_utilities import print_usage
 from callers.populate_database import populate_database
 from callers.export_database import export_database
+from callers.summary import summarize_month
 
 # python libraries
 import argparse
@@ -34,7 +35,7 @@ def main() -> None:
     parser.add_argument("provider_id", metavar="provider_id", type=str, help="registered provider id in local database")
     parser.add_argument("-v", "--version", action="store_true", help="print version number and exit")
     parser.add_argument("-p", "--populate", action="store_true", help="populate database with data from CSV files")
-    parser.add_argument("-s", "--summary", nargs="+", help="query daily summary")
+    parser.add_argument("-s", "--summary", nargs="+", help="query monthly summary")
     parser.add_argument("-e", "--export", nargs="+", help="export to CSV file by month")
 
     args = parser.parse_args()
@@ -56,6 +57,8 @@ def main() -> None:
     if args.summary:
         year = int(args.summary[0])
         month = int(args.summary[1])
+
+        summarize_month(args.provider_id, year, month)
 
 if __name__ == "__main__":
     try:
