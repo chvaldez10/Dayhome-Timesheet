@@ -57,11 +57,10 @@ def main() -> None:
         populate_database(args.provider_id)
 
     if args.export:
-        filename = args.export[0]
-        year = int(args.export[1])
-        month = int(args.export[2])
+        year = int(args.export[0])
+        month = int(args.export[1])
 
-        export_database(filename, year, month)
+        export_database(args.provider_id, year, month)
 
     if args.query:
         print(args.query)

@@ -30,16 +30,13 @@ class MonthlyCalendar:
         multi_index = pd.MultiIndex.from_product([week_indices, ENTRY_INDICES], names=["Week", "Entry"])
         self.calendar_df = pd.DataFrame(columns=DAYS_OF_WEEK, index=multi_index)
 
-    def populate_calendar(self) -> None:
-        """Populate the calendar with hard coded values for demonstration."""
-        for date in self.date_range:
-            week_of_month = (date.day + self.first_day_of_the_month - 1) // 7 + 1
-            day_of_week = date.strftime('%A')
-            self.calendar_df.loc[(week_of_month, "In"), day_of_week] = "8:00 AM"
-            self.calendar_df.loc[(week_of_month, "Out"), day_of_week] = "5:00 PM"
-            self.calendar_df.loc[(week_of_month, "Total"), day_of_week] = "8"
+    def update_calendar(self, week_of_month: int, day_of_week: int, in_time: int, out_time:int, total_time: int) -> None:
+        """Update the calendar with values from the database."""
+        self.calendar_df.loc[(week_of_month, "In"), day_of_week] = in_time
+        self.calendar_df.loc[(week_of_month, "Out"), day_of_week] = out_time
+        self.calendar_df.loc[(week_of_month, "Total"), day_of_week] = total_time
 
-        self.calendar_df.fillna("", inplace=True)
+        # self.calendar_df.fillna("", inplace=True)
 
     def print_calendar(self) -> None:
         """Print the calendar. If the calendar is not yet generated, indicate it's missing."""
