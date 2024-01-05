@@ -44,7 +44,7 @@ def main() -> None:
     parser.add_argument("-v", "--version", action="store_true", help="print version number and exit")
     parser.add_argument("-p", "--populate", action="store_true", help="populate database with data from CSV files")
     parser.add_argument("-q", "--query", help="query database by month (not yet implemented)")
-    parser.add_argument("-e", "--export", nargs="+", help="export to CSV file by month (not yet implemented)")
+    parser.add_argument("-e", "--export", nargs="+", help="export to CSV file by month")
 
     args = parser.parse_args()
 
