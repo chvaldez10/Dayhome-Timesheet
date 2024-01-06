@@ -9,7 +9,7 @@ USER_ID_MAP = load_json(USER_FILENAME)
 
 def summarizer(provider_id:str, year: int, month: int, day:int) -> None:
     summarize_day(provider_id, year, month, day)
-    summarize_month(provider_id, year, month, day)
+    # summarize_month(provider_id, year, month, day)
 
 def summarize_day(provider_id: str, year: int, month: int, day: int) -> None:
     my_email_sender = EmailSender()
@@ -17,6 +17,8 @@ def summarize_day(provider_id: str, year: int, month: int, day: int) -> None:
     get_daily_summary("Me", provider_id, year, month, day, "ProviderLog", "ProviderID")
     for user, user_id in USER_ID_MAP.items():
         get_daily_summary(user, user_id, year, month, day, "DailyLog", "ChildrenID")
+
+    my_email_sender.send_email()
 
 def get_daily_summary(user: str, user_id: str, year: int, month: int, day:int, table_name: str, id_name: str) -> None:
     my_database = MySQLDatabase()
