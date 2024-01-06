@@ -1,7 +1,11 @@
 import os
 import smtplib
 import ssl
+import imghdr
 from email.message import EmailMessage
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from jinja2 import Template
 
 class EmailSender:
     def __init__(self):
@@ -10,8 +14,34 @@ class EmailSender:
         self.email_receiver = os.getenv("EMAIL_RECEIVER")
         self.subject = "Test Email"
         self.body = """
-        Test Email Body
+        <html>
+            <body>
+                <p>Daily summary for [date]<p>
+                <table>
+                    <tr>
+                        <th>User</th>
+                        <th>Sign In</th>
+                        <th>Sign Out</th>
+                        <th>Total Time</th>
+                    </tr>
+                    <tr>
+                        {% for user, data in user_data.items() %}
+                        <td>{{ user }}</td>
+                        <td>{{ data[0] }} h</td>
+                        <td>{{ data[1] }} h</td>
+                        <td>{{ data[2] }} h</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </body>
+        </html>
         """
+
+        self.image_path = "./../../frontend/public/radiance-logo-no-bg.png"
+
+        self.user_data = {
+            "user": ["9 AM", "5 PM", 8]
+        }
 
     def send_email(self):
         em = EmailMessage()
