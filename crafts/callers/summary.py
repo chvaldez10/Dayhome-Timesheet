@@ -1,7 +1,7 @@
 from database.my_sql_database import MySQLDatabase
 from emailer.email_sender import EmailSender
 from readers.json_reader import load_json
-from database.my_sql_helper import query_for_daily_total, query_for_monthly_total
+from database.my_sql_helper import query_for_daily_total, query_for_monthly_total, query_for_daily_entry
 
 # json data
 USER_FILENAME = "./json/users.json"
@@ -18,15 +18,16 @@ def summarize_day(provider_id: str, year: int, month: int, day: int) -> None:
     for user, user_id in USER_ID_MAP.items():
         get_daily_summary(user, user_id, year, month, day, "DailyLog", "ChildrenID")
 
-    my_email_sender.send_email()
+    # my_email_sender.send_email()
 
 def get_daily_summary(user: str, user_id: str, year: int, month: int, day:int, table_name: str, id_name: str) -> None:
     my_database = MySQLDatabase()
-    daily_entry = query_for_daily_total(my_database, user_id, year, month, day, table_name, id_name)
+    daily_entry = query_for_daily_entry(my_database, user_id, year, month, day, table_name, id_name)
     
     if daily_entry:
+        in_time, out_time, total_time = daily_entry[0]
         time = daily_entry[0][0]
-        print(f"{user}: {time} h ")
+        print(f"{user}: {in_time} - {out_time} | {total_time} h ")
 
 def summarize_month(provider_id: str, year: int, month: int, day:int) -> None:
     print(f"\nMonthly Summary for {year}/{month}/{day}\n" + "="*50)
