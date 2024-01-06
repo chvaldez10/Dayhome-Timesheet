@@ -4,7 +4,7 @@ from readers.json_reader import load_json
 from utilities.date_time_utilities import format_timedelta_as_hhmm_ampm
 from database.my_sql_helper import query_for_daily_total, query_for_monthly_total, query_for_daily_entry
 
-import json
+import os
 
 # json data
 USER_FILENAME = "./json/users.json"
@@ -23,9 +23,8 @@ def summarize_day(provider_id: str, year: int, month: int, day: int) -> None:
     for user, user_id in USER_ID_MAP.items():
         get_daily_summary(user, user_id, year, month, day, "DailyLog", "ChildrenID", user_data)
 
-    # pretty = json.dumps(user_data, indent=4, sort_keys=True)
-    print(type(user_data["Me"][0]))
-    # my_email_sender.send_email()
+    my_email_sender.user_data = user_data
+    my_email_sender.send_email()
 
 def get_daily_summary(user: str, user_id: str, year: int, month: int, day:int, table_name: str, id_name: str, user_data: dict) -> None:
     my_database = MySQLDatabase()
@@ -35,7 +34,11 @@ def get_daily_summary(user: str, user_id: str, year: int, month: int, day:int, t
         in_time, out_time, total_time = daily_entry[0]
 
         if in_time:
-            formatted_in_time = format_timedelta_as_hhmm_ampm(in_time)
+            in_time = format_timedelta_as_hhmm_ampm(in_time)
+
+        if out_time:
+            out_time = format_timedelta_as_hhmm_ampm(out_time)
+
         user_data[user] = [in_time, out_time, total_time]
 
 def summarize_month(provider_id: str, year: int, month: int, day:int) -> None:
