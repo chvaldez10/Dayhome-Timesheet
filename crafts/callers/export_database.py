@@ -1,6 +1,7 @@
 from csv_calendar.csv_calendar import MonthlyCalendar
 from database.my_sql_database import MySQLDatabase
 from database.my_sql_helper import query_for_daily_entry
+from utilities.date_time_utilities import format_timedelta_as_hhmm_ampm
 from readers.json_reader import load_json
 
 # json data
@@ -62,6 +63,8 @@ def process_days_and_export(user: str, user_id: str, database: MySQLDatabase, ca
         # Update calendar or log warning for missing entry
         if daily_entry:
             in_time, out_time, total_time = daily_entry[0]
+            in_time = format_timedelta_as_hhmm_ampm(in_time) if in_time else in_time
+            out_time = format_timedelta_as_hhmm_ampm(out_time) if out_time else out_time
             calendar.update_calendar(week_of_month, day_of_week, in_time, out_time, total_time)
         
     # Export calendar to CSV

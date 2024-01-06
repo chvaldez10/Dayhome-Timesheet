@@ -17,21 +17,21 @@ class EmailSender:
         <html>
             <body>
                 <p>Daily summary for [date]</p>
-                <table>
+                <table style="border-collapse: collapse; width: 100%;">
                     <tr>
-                        <th>User</th>
-                        <th>Sign In</th>
-                        <th>Sign Out</th>
-                        <th>Total Time</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">User</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Sign In</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Sign Out</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Total Time</th>
                     </tr>
+                    {% for user, data in user_data.items() %}
                     <tr>
-                        {% for user, data in user_data.items() %}
-                        <td>{{ user }}</td>
-                        <td>{{ data[0] }} h</td>
-                        <td>{{ data[1] }} h</td>
-                        <td>{{ data[2] }} h</td>
-                        {% endfor %}
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ user }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ data[0] }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ data[1] }} </td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ data[2] }} H</td>
                     </tr>
+                    {% endfor %}
                 </table>
                 <img src="cid:radiance-logo-no-bg">
             </body>

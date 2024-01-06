@@ -32,13 +32,8 @@ def get_daily_summary(user: str, user_id: str, year: int, month: int, day:int, t
     
     if daily_entry:
         in_time, out_time, total_time = daily_entry[0]
-
-        if in_time:
-            in_time = format_timedelta_as_hhmm_ampm(in_time)
-
-        if out_time:
-            out_time = format_timedelta_as_hhmm_ampm(out_time)
-
+        in_time = format_timedelta_as_hhmm_ampm(in_time) if in_time else in_time
+        out_time = format_timedelta_as_hhmm_ampm(out_time) if out_time else out_time
         user_data[user] = [in_time, out_time, total_time]
 
 def summarize_month(provider_id: str, year: int, month: int, day:int) -> None:
