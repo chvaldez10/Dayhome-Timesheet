@@ -19,7 +19,7 @@
 from utilities.user_input_utilities import print_usage
 from callers.populate_database import populate_database
 from callers.export_database import export_database
-from callers.summary import summarize_month
+from callers.summary import summarizer
 
 # python libraries
 import argparse
@@ -59,7 +59,7 @@ def main() -> None:
         month = int(args.summary[1])
         day = int(args.summary[2])
 
-        summarize_month(args.provider_id, year, month, day)
+        summarizer(args.provider_id, year, month, day)
 
 if __name__ == "__main__":
     try:
