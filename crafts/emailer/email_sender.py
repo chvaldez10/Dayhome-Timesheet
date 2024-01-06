@@ -5,11 +5,13 @@ import imghdr
 from email.message import EmailMessage
 from jinja2 import FileSystemLoader, Environment
 class EmailSender:
-    def __init__(self):
+    def __init__(self, year_month_day: str) -> None:
+        self.year_month_day = year_month_day
+
+        # load from env file
         self.email_sender = os.getenv("EMAIL_SENDER")
         self.email_password = os.getenv("EMAIL_PASSWORD")
         self.email_receiver = os.getenv("EMAIL_RECEIVER")
-        self.subject = "Test Email"
 
         # html template
         self.template_loader = FileSystemLoader(searchpath="./../frontend/public/")
@@ -22,15 +24,15 @@ class EmailSender:
         # user data
         self.user_data = {}
 
-    def send_email(self):
+    def send_email(self, subject: str):
         em = EmailMessage()
         em["From"] = self.email_sender
         em["To"] = self.email_receiver
-        em["Subject"] = self.subject
+        em["Subject"] = subject
 
         # render template
         template = self.template_env.get_or_select_template(self.template_file)
-        html_content = template.render(user_data=self.user_data)
+        html_content = template.render(user_data=self.user_data, year_month_day=self.year_month_day)
         em.add_alternative(html_content, subtype="html")
 
         # attach image
