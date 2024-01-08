@@ -8,7 +8,7 @@ USER_ID_MAP = load_json(USER_FILENAME)
 
 def summarizer(provider_id:str, year: int, month: int, day:int) -> None:
     formatted_year_month_day = format_year_month_day(year, month, day)
-    my_email_sender = EmailSender(formatted_year_month_day, "Gmail")
+    my_email_sender = EmailSender(formatted_year_month_day, "Gmail", "email_template_day.html")
     summary_manager = SummaryManager(provider_id, year, month, day)
 
     # summarize day

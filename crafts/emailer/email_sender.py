@@ -13,13 +13,12 @@ class EmailConfig:
     def __init__(self, provider_name: str):
         self.provider_name = provider_name
         all_config = load_json(CONFIG_SPEC_FILENAME)
-        print("line 16", all_config)
         self.config = all_config[provider_name]
 
 class EmailSender:
     """Manage the creation and sending of emails using SMTP protocol."""
 
-    def __init__(self, year_month_day: str, email_provider_name: str) -> None:
+    def __init__(self, year_month_day: str, email_provider_name: str, email_template_filename:str) -> None:
         self.year_month_day = year_month_day
         # Load configuration for email provider
         self.config = EmailConfig(email_provider_name).config
@@ -32,7 +31,7 @@ class EmailSender:
         # Set up Jinja2 for HTML templating
         self.template_loader = FileSystemLoader(searchpath="./../frontend/public/")
         self.template_env = Environment(loader=self.template_loader)
-        self.template_file = "email_template.html"
+        self.template_file = email_template_filename
 
         # Image path configuration
         self.image_path = "./../frontend/public/radiance-logo-no-bg.png"
