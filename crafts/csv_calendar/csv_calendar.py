@@ -43,6 +43,11 @@ class MonthlyCalendar:
         else:
             print("No calendar data found")
 
+    def clean(self):
+        """Add necessary commands to clean dataframe"""
+        self.calendar_df.drop(["Saturday", "Sunday"], axis=1, inplace=True)
+        self.calendar_df.fillna("", inplace=True)
+
     def export_csv(self, filename: str) -> None:
         """Export the calendar data to a CSV file. If the calendar is missing, notify the user."""
         if self.calendar_df is not None:
