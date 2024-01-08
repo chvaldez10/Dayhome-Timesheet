@@ -1,0 +1,34 @@
+<table style="border-collapse: collapse; width: 100%;">
+    <tr>
+        <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Week
+        </th>
+        <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Entry
+        </th>
+        <th colspan="5" style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2;">
+            Days</th>
+    </tr>
+    <tr>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Monday</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Tuesday</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Wednesday</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Thursday</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Friday</th>
+    </tr>
+    {% for week in range(1, 6) %}
+    <tr>
+        <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ week }}</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">In</td>
+        <!-- Fill in with actual data for each day -->
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
+        <!-- Repeat for each day -->
+    </tr>
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Out</td>
+        <!-- Fill in with actual data for each day -->
+    </tr>
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Total</td>
+        <!-- Fill in with actual data for each day -->
+    </tr>
+    {% endfor %}
+</table>

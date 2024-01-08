@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Constants for days of the week and the types of entries
-DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 ENTRY_INDICES = ["In", "Out", "Total"]
 
 class MonthlyCalendar:
