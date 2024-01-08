@@ -43,6 +43,14 @@ def export_user_data(user: str, user_id: str, year: int, month: int, table_name:
     # Process each day and export CSV
     process_days_and_export(user, user_id, my_database, my_calendar, table_name, id_name)
 
+    # clean df
+    my_calendar.calendar_df.drop(["Saturday", "Sunday"], axis=1, inplace=True)
+
+    # Export calendar to CSV
+    export_file_name = f"./csv_export/{user_id}.csv"
+    my_calendar.export_csv(export_file_name)
+    print(f"Exported {export_file_name}")
+
 def process_days_and_export(user: str, user_id: str, database: MySQLDatabase, calendar: MonthlyCalendar, table_name: str, id_name: str) -> None:
     """
     Process each day in the calendar, query for daily entries, and export the calendar to CSV.
@@ -66,8 +74,3 @@ def process_days_and_export(user: str, user_id: str, database: MySQLDatabase, ca
             in_time = format_timedelta_as_hhmm_ampm(in_time) if in_time else in_time
             out_time = format_timedelta_as_hhmm_ampm(out_time) if out_time else out_time
             calendar.update_calendar(week_of_month, day_of_week, in_time, out_time, total_time)
-        
-    # Export calendar to CSV
-    export_file_name = f"./csv_export/{user_id}.csv"
-    calendar.export_csv(export_file_name)
-    print(f"Exported {export_file_name}")
