@@ -1,0 +1,12 @@
+{
+  "providers": {
+    "Gmail": {
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 465
+    },
+    "Yahoo": {
+      "smtp_server": "smtp.mail.yahoo.com",
+      "smtp_port": 465
+    }
+  }
+}
