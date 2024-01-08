@@ -41,17 +41,18 @@ def export_user_data(user: str, user_id: str, year: int, month: int, table_name:
     my_calendar.generate_calendar()
 
     # Process each day and export CSV
-    process_days_and_export(user, user_id, my_database, my_calendar, table_name, id_name)
+    process_days(user, user_id, my_database, my_calendar, table_name, id_name)
 
     # clean df
     my_calendar.calendar_df.drop(["Saturday", "Sunday"], axis=1, inplace=True)
-
+    my_calendar.calendar_df.fillna("", inplace=True)
+    
     # Export calendar to CSV
     export_file_name = f"./csv_export/{user_id}.csv"
     my_calendar.export_csv(export_file_name)
     print(f"Exported {export_file_name}")
 
-def process_days_and_export(user: str, user_id: str, database: MySQLDatabase, calendar: MonthlyCalendar, table_name: str, id_name: str) -> None:
+def process_days(user: str, user_id: str, database: MySQLDatabase, calendar: MonthlyCalendar, table_name: str, id_name: str) -> None:
     """
     Process each day in the calendar, query for daily entries, and export the calendar to CSV.
 

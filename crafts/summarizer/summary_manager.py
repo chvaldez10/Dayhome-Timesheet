@@ -44,9 +44,9 @@ class SummaryManager:
         user_data = {}
 
         print(f"\nDaily Summary for {self.year}/{self.month}/{self.day}\n" + "="*50)
-        self.get_daily_summary("Me", self.provider_id, "ProviderLog", "ProviderID", user_data)
+        self._get_daily_summary("Me", self.provider_id, "ProviderLog", "ProviderID", user_data)
         for user, user_id in USER_ID_MAP.items():
-            self.get_daily_summary(user, user_id, "DailyLog", "ChildrenID", user_data)
+            self._get_daily_summary(user, user_id, "DailyLog", "ChildrenID", user_data)
 
         return user_data
 
@@ -74,5 +74,5 @@ class SummaryManager:
         monthly_total = query_for_monthly_total(self.database, user_id, self.year, self.month, table_name, id_name)
 
         if monthly_total:
-            monthly_total = monthly_total if monthly_total[0][0] else 0
+            monthly_total = monthly_total[0][0] if monthly_total[0][0] else 0
             user_data[user] = monthly_total

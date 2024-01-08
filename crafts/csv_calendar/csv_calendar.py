@@ -36,8 +36,6 @@ class MonthlyCalendar:
         self.calendar_df.loc[(week_of_month, "Out"), day_of_week] = out_time
         self.calendar_df.loc[(week_of_month, "Total"), day_of_week] = total_time
 
-        # self.calendar_df.fillna("", inplace=True)
-
     def print_calendar(self) -> None:
         """Print the calendar. If the calendar is not yet generated, indicate it's missing."""
         if self.calendar_df is not None:
