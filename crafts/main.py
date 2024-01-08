@@ -9,7 +9,7 @@
         -s, --summary:         summarize monthly data(takes an additional argument)
         -v, --version:         print version
 
-    Usage:          main.py <provider_id> [-v] [-p] [-q QUERY] [-e EXPORT]
+    Usage:          main.py <provider_id> [-v] [-p] [-s SUMMARY] [-e EXPORT]
 
     Arguments:
         Provider Id:                   registered provider id in local database
