@@ -50,7 +50,7 @@ class SummaryManager:
 
         return user_data
 
-    def get_daily_summary(self, user: str, user_id: str, table_name: str, id_name: str, user_data: dict):
+    def _get_daily_summary(self, user: str, user_id: str, table_name: str, id_name: str, user_data: dict):
         """
         Retrieves and formats the daily entry data for a single user from the database.
         """
@@ -62,8 +62,10 @@ class SummaryManager:
             out_time = format_timedelta_as_hhmm_ampm(out_time) if out_time else "N / A"
             user_data[user] = [in_time, out_time, total_time]
 
-    def summarize_month(self):
-        pass
+    def summarize_month(self) -> dict:
+        self.get_monthly_summary("Me", "ProviderLog", "ProviderID")
+        for user, user_id in USER_ID_MAP.items():
+            self.get_monthly_summary(user, user_id, "DailyLog", "ChildrenID")
 
-    def get_monthly_summary(self, user: str, user_id: str, table_name: str, id_name: str):
+    def _get_monthly_summary(self, user: str, user_id: str, table_name: str, id_name: str):
         pass

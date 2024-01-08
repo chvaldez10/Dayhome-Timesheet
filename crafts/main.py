@@ -58,8 +58,9 @@ def main() -> None:
         year = int(args.summary[0])
         month = int(args.summary[1])
         day = int(args.summary[2])
+        mode = args.summary[3]
 
-        summarizer(args.provider_id, year, month, day)
+        summarizer(args.provider_id, year, month, day, mode)
 
 if __name__ == "__main__":
     try:
