@@ -2,6 +2,7 @@ from database.my_sql_database import MySQLDatabase
 from readers.json_reader import load_json
 from database.my_sql_helper import query_for_monthly_total, query_for_daily_entry
 from utilities.date_time_utilities import format_timedelta_as_hhmm_ampm
+from utilities.calendar_df_utilities import export_user_data
 
 USER_FILENAME = "./json/users.json"
 USER_ID_MAP = load_json(USER_FILENAME)
@@ -76,3 +77,12 @@ class SummaryManager:
         if monthly_total:
             monthly_total = monthly_total[0][0] if monthly_total[0][0] else 0
             user_data[user] = monthly_total
+
+    def summarize_week(self) -> dict:
+        user_data = {}
+        for user, user_id in USER_ID_MAP.items():
+            user_data[user] = export_user_data(user, user_id, self.year, self.month, "DailyLog", "ChildrenID", False)
+
+        user_data["Me"] = export_user_data("Provider", self.provider_id, self.year, self.month, "ProviderLog", "ProviderID", False)
+
+        return user_data
