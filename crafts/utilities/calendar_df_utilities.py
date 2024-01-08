@@ -2,7 +2,11 @@ from csv_calendar.csv_calendar import MonthlyCalendar
 from database.my_sql_database import MySQLDatabase
 from database.my_sql_helper import query_for_daily_entry
 from utilities.date_time_utilities import format_timedelta_as_hhmm_ampm
+
 import pandas as pd
+import json
+WEEK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+ENTRY_INDICES = ["In", "Out", "Total"]
 
 def export_user_data(user: str, user_id: str, year: int, month: int, table_name: str, id_name: str, export_data_to_csv: bool) -> pd.DataFrame:
     """
@@ -71,3 +75,43 @@ def export_to_csv(calendar: MonthlyCalendar, user_id: str) -> None:
     export_file_name = f"./csv_export/{user_id}.csv"
     calendar.export_csv(export_file_name)
     print(f"Exported {export_file_name}")
+
+# {
+#     'User Name': {
+#         Week Number: {
+#             'In': {
+#                 Week Number: [Time for each weekday],
+#             },
+#             'Out': {
+#                 Week Number: [Time for each weekday],
+#             },
+#             'Total': {
+#                 Week Number: [Total hours for each weekday],
+#             }
+#         },
+#         ... # More weeks
+#     },
+#     ... # More users
+# }
+
+
+def format_calendar_df(user_month_data: dict) -> list[dict]:
+    all_user_data = {}
+
+    for user, data in user_month_data.items():
+        user_data = {}
+        for (week_number, entry), group in data.groupby(level=[0, 1]):
+            # Transpose the group to get weekdays as columns and entries as rows
+            transposed_group = group.unstack().T
+
+            # Convert to a dictionary
+            entry_data = transposed_group.to_dict(orient='list')
+
+            # Create week data
+            if week_number not in user_data:
+                user_data[week_number] = {}
+            user_data[week_number][entry] = entry_data
+
+        all_user_data[user] = user_data
+
+    return all_user_data
