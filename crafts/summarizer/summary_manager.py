@@ -63,9 +63,16 @@ class SummaryManager:
             user_data[user] = [in_time, out_time, total_time]
 
     def summarize_month(self) -> dict:
-        self.get_monthly_summary("Me", "ProviderLog", "ProviderID")
+        user_data = {}
+        self._get_monthly_summary("Me", self.provider_id, "ProviderLog", "ProviderID", user_data)
         for user, user_id in USER_ID_MAP.items():
-            self.get_monthly_summary(user, user_id, "DailyLog", "ChildrenID")
+            self._get_monthly_summary(user, user_id, "DailyLog", "ChildrenID", user_data)
 
-    def _get_monthly_summary(self, user: str, user_id: str, table_name: str, id_name: str):
-        pass
+        return user_data
+
+    def _get_monthly_summary(self, user: str, user_id: str, table_name: str, id_name: str, user_data: dict):
+        monthly_total = query_for_monthly_total(self.database, user_id, self.year, self.month, table_name, id_name)
+
+        if monthly_total:
+            monthly_total = monthly_total if monthly_total[0][0] else 0
+            user_data[user] = monthly_total
