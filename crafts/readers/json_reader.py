@@ -9,7 +9,7 @@ def load_json(filename: str) -> Optional[Dict]:
     :return: A dictionary representation of the JSON file or None if an error occurs.
     """
     try:
-        with open("./json/users.json", "r") as users_data:
+        with open(filename, "r") as users_data:
             return json.load(users_data)
     except FileNotFoundError as e:
         print(f"Error reading {filename}. {e}")
