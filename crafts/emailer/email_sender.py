@@ -8,6 +8,8 @@ from readers.json_reader import load_json
 
 CONFIG_SPEC_FILENAME = "./json/smtp_config_spec.json"
 
+WEEK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+
 class EmailConfig:
     """Load and hold configuration for email service provider."""
     def __init__(self, provider_name: str):
@@ -58,7 +60,7 @@ class EmailSender:
 
         # Render HTML template and set email body
         template = self.template_env.get_or_select_template(self.template_file)
-        html_content = template.render(user_data=self.user_data, year_month_day=self.year_month_day)
+        html_content = template.render(user_data=self.user_data, year_month_day=self.year_month_day, week_days=WEEK_DAYS)
         em.add_alternative(html_content, subtype="html")
 
         # Attach image (if applicable)
