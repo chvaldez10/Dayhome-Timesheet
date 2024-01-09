@@ -78,7 +78,7 @@ def export_to_csv(calendar: MonthlyCalendar, user_id: str) -> None:
 
 # {
 #     'User Name': {
-#         Week Number: {
+#         1 : {
 #             'In': {
 #                 Week Number: [Time for each weekday],
 #             },
@@ -93,7 +93,6 @@ def export_to_csv(calendar: MonthlyCalendar, user_id: str) -> None:
 #     },
 #     ... # More users
 # }
-
 
 def format_calendar_df(user_month_data: dict) -> list[dict]:
     all_user_data = {}

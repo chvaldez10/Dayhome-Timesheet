@@ -1,4 +1,5 @@
 <!-- email template -->
+
 <html>
 
 <body>
@@ -7,7 +8,6 @@
         style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 24px; font-weight: bold; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">
         Summary for {{ user }}.
     </h2>
-
     <table style="border-collapse: collapse; width: 100%;">
         <tr>
             <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">
@@ -20,6 +20,10 @@
                 style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2;">
                 Week Days
             </th>
+            <th rowspan="2"
+                style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2;">
+                Total
+            </th>
         </tr>
         <tr>
             {% for day in week_days %}
@@ -28,21 +32,32 @@
             </th>
             {% endfor %}
         </tr>
-
-        {% set week_entry_set = data.index.to_list() %}
-        {% for week, entries in week_entry_set %}
+        {% for week_number, entries in data.items() %}
+        {% set week_total = 0 %}
         <tr>
-            <td rowspan="{{ entries|length }}" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ week
-                }}</td>
-            {% for entry, times in entries.items() %}
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ entry }}</td>
-            {% for day in week_days %}
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
-                {{ times[day] }}
-            </td>
+            <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ week_number }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">In</td>
+            {% for value in entries['In'][week_number] %}
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
             {% endfor %}
         </tr>
-        {% endfor %}
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Out</td>
+            {% for value in entries['Out'][week_number] %}
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Total</td>
+            {% for value in entries['Total'][week_number] %}
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
+            {% set value = 0 if value == '' else value %}
+            {% set week_total = week_total + value %}
+            {% endfor %}
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ week_total }}</td>
+        </tr>
         {% endfor %}
     </table>
     {% endfor %}
