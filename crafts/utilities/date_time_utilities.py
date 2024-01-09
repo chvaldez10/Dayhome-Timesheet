@@ -24,20 +24,22 @@ def format_year_month_day(year:int, month:int, day:int) -> str:
     formatted_date = date_obj.strftime("%B %d, %Y")
     return formatted_date
 
-def get_week_day_range(year: int, month:str) -> List[str]:
+def get_week_day_range(year: int, month:str) -> dict:
     """Get a week day range for a given year and month."""
     # Find the first Monday of the month
     first_day_of_month = datetime(year, month, 1)
     first_monday = first_day_of_month + timedelta(days=(7 - first_day_of_month.weekday() + calendar.MONDAY) % 7)
 
     # Generate all Mondays of the month
-    week_day_range = []
+    week_day_range = {}
     current_monday = first_monday
+    week_number = 1
+
     while current_monday.month == month:
         current_monday_day = current_monday.date().day
-        temp_date_range_str = f"{current_monday_day}-{current_monday_day+5}"
-        week_day_range.append(temp_date_range_str)
+        temp_date_range_str = f"__{current_monday_day}__-__{current_monday_day+5}__"
+        week_day_range[week_number] = temp_date_range_str
+        week_number += 1
         current_monday += timedelta(days=7)
 
-    print(week_day_range)
     return week_day_range
