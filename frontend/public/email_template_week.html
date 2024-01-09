@@ -40,6 +40,9 @@
             {% for value in entries['In'][week_number] %}
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
             {% endfor %}
+            {% if loop.first %}
+            <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ week_total }}</td>
+            {% endif %}
         </tr>
         <tr>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Out</td>
@@ -51,14 +54,13 @@
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Total</td>
             {% for value in entries['Total'][week_number] %}
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
-            {% set value = 0 if value == '' else value %}
-            {% set week_total = week_total + value %}
+            {% if value %}
+            {% set week_total = week_total + value|float %}
+            {% endif %}
             {% endfor %}
         </tr>
-        <tr>
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ week_total }}</td>
-        </tr>
         {% endfor %}
+
     </table>
     {% endfor %}
 </body>

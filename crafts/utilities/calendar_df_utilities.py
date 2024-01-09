@@ -94,7 +94,7 @@ def export_to_csv(calendar: MonthlyCalendar, user_id: str) -> None:
 #     ... # More users
 # }
 
-def format_calendar_df(user_month_data: dict) -> list[dict]:
+def format_calendar_df(user_month_data: dict) -> dict:
     all_user_data = {}
 
     for user, data in user_month_data.items():
@@ -104,7 +104,7 @@ def format_calendar_df(user_month_data: dict) -> list[dict]:
             transposed_group = group.unstack().T
 
             # Convert to a dictionary
-            entry_data = transposed_group.to_dict(orient='list')
+            entry_data = transposed_group.to_dict(orient="list")
 
             # Create week data
             if week_number not in user_data:
@@ -114,3 +114,6 @@ def format_calendar_df(user_month_data: dict) -> list[dict]:
         all_user_data[user] = user_data
 
     return all_user_data
+
+def get_formatted_calendar_df_weekly_total(list) -> dict:
+    pass
