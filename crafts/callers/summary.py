@@ -28,14 +28,15 @@ def summarizer(provider_id:str, year: int, month: int, day: int, mode: str) -> N
     elif mode == "weekly":
         # initialize data
         user_data = summary_manager.summarize_week()
-        restructured_data = format_calendar_df(user_data)
         week_range_list = get_week_day_range(year, month)
-        my_email_sender.user_data = restructured_data
+        restructured_data = format_calendar_df(user_data)
+        get_formatted_calendar_df_weekly_total(restructured_data)
         my_email_sender.template_file = "email_template_week.html"
+        my_email_sender.user_data = restructured_data
         email_subject = f" {MONTH_MAP[str(month)]} {year} overview 🗓️"
 
         # send email
-        my_email_sender.send_email(email_subject, week_range_list)
+        # my_email_sender.send_email(email_subject, week_range_list)
     elif mode == "monthly":
         user_data = summary_manager.summarize_month()
         my_email_sender.user_data = user_data

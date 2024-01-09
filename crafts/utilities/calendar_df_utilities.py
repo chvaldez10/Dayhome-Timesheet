@@ -115,5 +115,7 @@ def format_calendar_df(user_month_data: dict) -> dict:
 
     return all_user_data
 
-def get_formatted_calendar_df_weekly_total(list) -> dict:
-    pass
+def get_formatted_calendar_df_weekly_total(all_user_data: dict) -> dict:
+    for user, data in all_user_data.items():
+        print(data)
+        break
