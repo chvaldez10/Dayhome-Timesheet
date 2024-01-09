@@ -21,18 +21,28 @@ def summarizer(provider_id:str, year: int, month: int, day: int, mode: str) -> N
         user_data = summary_manager.summarize_day()
         my_email_sender.user_data = user_data
         my_email_sender.template_file = "email_template_day.html"
+        email_subject = f"Summary for {formatted_year_month_day} 🏠"
+
+        # send email
         my_email_sender.send_email(f"Summary for {formatted_year_month_day} 🏠")
     elif mode == "weekly":
+        # initialize data
         user_data = summary_manager.summarize_week()
         restructured_data = format_calendar_df(user_data)
         week_range_list = get_week_day_range(year, month)
-        # my_email_sender.user_data = restructured_data
-        # my_email_sender.template_file = "email_template_week.html"
-        # my_email_sender.send_email(f" {MONTH_MAP[str(month)]} {year} overview 🗓️")
+        my_email_sender.user_data = restructured_data
+        my_email_sender.template_file = "email_template_week.html"
+        email_subject = f" {MONTH_MAP[str(month)]} {year} overview 🗓️"
+
+        # send email
+        my_email_sender.send_email(email_subject, week_range_list)
     elif mode == "monthly":
         user_data = summary_manager.summarize_month()
         my_email_sender.user_data = user_data
         my_email_sender.template_file = "email_template_month.html"
-        my_email_sender.send_email(f"Summary for {MONTH_MAP[str(month)]} {year} 🏠")
+        email_subject = f"Summary for {MONTH_MAP[str(month)]} {year} 🏠"
+
+        # send email
+        my_email_sender.send_email(email_subject)
 
     print("Email sent.")

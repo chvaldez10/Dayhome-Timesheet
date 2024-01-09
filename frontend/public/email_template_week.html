@@ -35,7 +35,8 @@
         {% for week_number, entries in data.items() %}
         {% set week_total = 0 %}
         <tr>
-            <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ week_number }}</td>
+            <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{
+                week_day_range[week_number] }}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">In</td>
             {% for value in entries['In'][week_number] %}
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>

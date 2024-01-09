@@ -41,9 +41,9 @@ class EmailSender:
         # Data to be used within the user email
         self.user_data = {}
 
-    def send_email(self, subject: str):
+    def send_email(self, subject: str, week_day_range: dict = []):
         """Send an email with the given subject."""
-        em = self._prepare_email_message(subject)
+        em = self._prepare_email_message(subject, week_day_range)
 
         # Use SSL context for secure email sending
         context = ssl.create_default_context()
@@ -51,7 +51,7 @@ class EmailSender:
             smtp.login(self.email_sender, self.email_password)
             smtp.sendmail(self.email_sender, self.email_receiver, em.as_string())
 
-    def _prepare_email_message(self, subject: str) -> EmailMessage:
+    def _prepare_email_message(self, subject: str, week_day_range: dict) -> EmailMessage:
         """Prepare the email message with HTML content and image attachment."""
         em = EmailMessage()
         em["From"] = self.email_sender
@@ -60,7 +60,7 @@ class EmailSender:
 
         # Render HTML template and set email body
         template = self.template_env.get_or_select_template(self.template_file)
-        html_content = template.render(user_data=self.user_data, year_month_day=self.year_month_day, week_days=WEEK_DAYS)
+        html_content = template.render(user_data=self.user_data, year_month_day=self.year_month_day, week_days=WEEK_DAYS, week_day_range=week_day_range)
         em.add_alternative(html_content, subtype="html")
 
         # Attach image (if applicable)

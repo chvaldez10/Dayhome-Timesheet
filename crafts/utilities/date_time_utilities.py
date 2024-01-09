@@ -1,5 +1,4 @@
 from datetime import timedelta, datetime
-from typing import List, Tuple
 import calendar
 
 def format_timedelta_as_hhmm_ampm(td: timedelta):
