@@ -2,7 +2,8 @@ from emailer.email_sender import EmailSender
 from readers.json_reader import load_json
 from utilities.date_time_utilities import format_year_month_day
 from summarizer.summary_manager import SummaryManager
-from utilities.calendar_df_utilities import format_calendar_df
+from utilities.date_time_utilities import get_week_day_range
+from utilities.calendar_df_utilities import format_calendar_df, get_formatted_calendar_df_weekly_total
 
 USER_FILENAME = "./json/users.json"
 MONTH_MAP_FILENAME = "./json/month_map.json"
@@ -24,9 +25,10 @@ def summarizer(provider_id:str, year: int, month: int, day: int, mode: str) -> N
     elif mode == "weekly":
         user_data = summary_manager.summarize_week()
         restructured_data = format_calendar_df(user_data)
-        my_email_sender.user_data = restructured_data
-        my_email_sender.template_file = "email_template_week.html"
-        my_email_sender.send_email(f" {MONTH_MAP[str(month)]} {year} overview 🗓️")
+        week_range_list = get_week_day_range(year, month)
+        # my_email_sender.user_data = restructured_data
+        # my_email_sender.template_file = "email_template_week.html"
+        # my_email_sender.send_email(f" {MONTH_MAP[str(month)]} {year} overview 🗓️")
     elif mode == "monthly":
         user_data = summary_manager.summarize_month()
         my_email_sender.user_data = user_data

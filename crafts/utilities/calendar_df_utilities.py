@@ -2,6 +2,7 @@ from csv_calendar.csv_calendar import MonthlyCalendar
 from database.my_sql_database import MySQLDatabase
 from database.my_sql_helper import query_for_daily_entry
 from utilities.date_time_utilities import format_timedelta_as_hhmm_ampm
+from typing import List, Tuple
 
 import pandas as pd
 import json
