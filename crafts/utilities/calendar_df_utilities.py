@@ -115,7 +115,12 @@ def format_calendar_df(user_month_data: dict) -> dict:
 
     return all_user_data
 
-def get_formatted_calendar_df_weekly_total(all_user_data: dict) -> dict:
+def get_formatted_calendar_df_weekly_total(all_user_data: dict, num_of_weeks: int = 1) -> dict:
+    """Calculate the weekly total per user."""
     for user, data in all_user_data.items():
-        print(data)
-        break
+        for week_num in range(1, num_of_weeks + 1):
+            total_list = data[week_num]["Total"][week_num]
+            cleaned_list = [x for x in total_list if x != '']
+            week_total = sum(cleaned_list)
+
+            all_user_data[user][week_num]["Week Total"] = week_total

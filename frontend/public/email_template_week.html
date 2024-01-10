@@ -33,7 +33,6 @@
             {% endfor %}
         </tr>
         {% for week_number, entries in data.items() %}
-        {% set week_total = 0 %}
         <tr>
             <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{
                 week_day_range[week_number] }}</td>
@@ -41,9 +40,9 @@
             {% for value in entries['In'][week_number] %}
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
             {% endfor %}
-            {% if loop.first %}
-            <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ week_total }}</td>
-            {% endif %}
+            <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{
+                entries['Week Total']
+                }}</td>
         </tr>
         <tr>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Out</td>
@@ -55,9 +54,6 @@
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Total</td>
             {% for value in entries['Total'][week_number] %}
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
-            {% if value %}
-            {% set week_total = week_total + value|float %}
-            {% endif %}
             {% endfor %}
         </tr>
         {% endfor %}
