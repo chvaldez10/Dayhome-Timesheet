@@ -123,4 +123,4 @@ def get_formatted_calendar_df_weekly_total(all_user_data: dict, num_of_weeks: in
             cleaned_list = [x for x in total_list if x != '']
             week_total = sum(cleaned_list)
 
-            all_user_data[user][week_num]["Week Total"] = week_total
+            all_user_data[user][week_num]["Week Total"] = round(week_total, 2)
