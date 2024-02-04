@@ -42,13 +42,8 @@ def summarizer(provider_id: str, year: int, month: int, day: int, mode: str) -> 
         week_range_list = get_week_day_range(year, month)
         restructured_data = format_calendar_df(user_data)
         get_formatted_calendar_df_weekly_total(restructured_data, len(week_range_list))
-
-        # delete print statements after
-        print("week range list:")
-        print(week_range_list)
-
         email_subject = f"{MONTH_MAP[str(month)]} {year} Overview 🗓️"
-        # send_summary_email(my_email_sender, email_subject, "email_template_week.html", restructured_data, week_range_list)
+        send_summary_email(my_email_sender, email_subject, "email_template_week.html", restructured_data, week_range_list)
 
     elif mode == "monthly":
         user_data = summary_manager.summarize_month()
