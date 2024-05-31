@@ -1,0 +1,34 @@
+<!-- email template -->
+<html>
+
+<body>
+    <h2
+        style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 24px; font-weight: bold; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">
+        Summary for {{ year_month_day }}.</h2>
+
+    <!-- table for daily entry -->
+    <table style="border-collapse: collapse; width: 100%;">
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">User</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Sign In</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Sign Out</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Total Time
+            </th>
+        </tr>
+        {% for user, data in user_data.items() %}
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ user }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ data[0] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ data[1] }} </td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ data[2] }} h</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <img src="cid:radiance-logo-no-bg"
+        style="width: 200px; height: auto; display: block; margin: 25px auto; padding: 10px; border: 1px solid #ddd; box-shadow: 2px 2px 2px #aaa;">
+
+
+</body>
+
+</html>
