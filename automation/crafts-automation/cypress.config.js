@@ -13,6 +13,7 @@ module.exports = defineConfig({
     baseUrl: process.env.CRAFTS_LOGIN_URL,
     viewportWidth: 1920,
     viewportHeight: 1080,
-    defaultCommandTimeout: 7000,
+    defaultCommandTimeout: 10000,
+    chromeWebSecurity: false,
   },
 });

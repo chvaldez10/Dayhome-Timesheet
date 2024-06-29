@@ -7,6 +7,6 @@ describe("Extract CSV", () => {
   });
 
   it("login", () => {
-    cy.log("Hello World");
+    cy.login(Cypress.env("username"), Cypress.env("password"));
   });
 });
