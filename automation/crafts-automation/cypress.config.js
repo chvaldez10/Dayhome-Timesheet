@@ -1,11 +1,10 @@
 const { defineConfig } = require("cypress");
-require.config("dotenv");
+require("dotenv").config();
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      dotenv.config({ path: ".env.local" });
-
+      // Adding environment variables to Cypress config
       config.env.username = process.env.CRAFTS_USERNAME;
       config.env.password = process.env.CRAFTS_PASSWORD;
 
@@ -15,10 +14,5 @@ module.exports = defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
     defaultCommandTimeout: 7000,
-  },
-  env: {
-    // Default values (optional)
-    username: process.env.CRAFTS_USERNAME,
-    password: process.env.CRAFTS_PASSWORD,
   },
 });
