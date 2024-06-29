@@ -1,0 +1,65 @@
+<!-- email template -->
+
+<html>
+
+<body>
+    {% for user, data in user_data.items() %}
+    <h2
+        style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 24px; font-weight: bold; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">
+        Summary for {{ user }}.
+    </h2>
+    <table style="border-collapse: collapse; width: 100%;">
+        <tr>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">
+                Week
+            </th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">
+                Entry
+            </th>
+            <th colspan="5"
+                style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2;">
+                Week Days
+            </th>
+            <th rowspan="2"
+                style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2;">
+                Total
+            </th>
+        </tr>
+        <tr>
+            {% for day in week_days %}
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">
+                {{ day }}
+            </th>
+            {% endfor %}
+        </tr>
+        {% for week_number, entries in data.items() %}
+        <tr>
+            <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{
+                week_day_range[week_number] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">In</td>
+            {% for value in entries['In'][week_number] %}
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
+            {% endfor %}
+            <td rowspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{
+                entries['Week Total']
+                }}</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Out</td>
+            {% for value in entries['Out'][week_number] %}
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Total</td>
+            {% for value in entries['Total'][week_number] %}
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ value }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% endfor %}
+</body>
+
+</html>

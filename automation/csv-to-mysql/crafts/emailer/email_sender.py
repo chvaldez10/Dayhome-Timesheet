@@ -31,12 +31,12 @@ class EmailSender:
         self.email_receiver = os.getenv("EMAIL_RECEIVER")
 
         # Set up Jinja2 for HTML templating
-        self.template_loader = FileSystemLoader(searchpath="./../frontend/public/")
+        self.template_loader = FileSystemLoader(searchpath="./../static/")
         self.template_env = Environment(loader=self.template_loader)
         self.template_file = ""
 
         # Image path configuration
-        self.image_path = "./../frontend/public/radiance-logo-no-bg.png"
+        self.image_path = "./../static/radiance-logo-no-bg.png"
 
         # Data to be used within the user email
         self.user_data = {}

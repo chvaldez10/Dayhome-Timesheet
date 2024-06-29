@@ -77,21 +77,22 @@ def get_all_fridays_of_month(year: int, month: int) -> list:
     """
     Return a list of all Fridays of the specified month and year.
     """
+    # Calculate the first day of the month
     first_day = datetime(year, month, 1)
     first_day_weekday = first_day.weekday()
-    days_until_first_friday = (4 - first_day_weekday) % 7
     
-    # If the first day of the month is after Friday, adjust for the next week
-    if first_day_weekday > 4:
-        days_until_first_friday += 7
+    # Calculate the number of days until the first Friday
+    days_until_first_friday = (4 - first_day_weekday + 7) % 7
     
+    # Find the first Friday
     first_friday = first_day + timedelta(days=days_until_first_friday)
-    fridays = [first_friday]
     
-    next_friday = first_friday + timedelta(days=7)
-    while next_friday.month == month:
-        fridays.append(next_friday)
-        next_friday += timedelta(days=7)
+    # Generate all Fridays in the month
+    fridays = []
+    current_friday = first_friday
+    while current_friday.month == month:
+        fridays.append(current_friday)
+        current_friday += timedelta(days=7)
     
     return fridays
 
