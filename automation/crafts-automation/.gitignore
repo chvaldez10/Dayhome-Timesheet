@@ -69,3 +69,6 @@ coverage/
 
 # env file
 .env*
+
+# temp files
+del*.*

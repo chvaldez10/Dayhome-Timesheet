@@ -1,8 +1,8 @@
 describe("Extract CSV", () => {
   beforeEach(() => {
-    cy.clearAllSessionStorage();
-    cy.clearLocalStorage();
-    cy.clearCookies();
+    // cy.clearAllSessionStorage();
+    // cy.clearLocalStorage();
+    // cy.clearCookies();
     cy.visit("/");
   });
 
@@ -14,6 +14,7 @@ describe("Extract CSV", () => {
   it("login", () => {
     cy.login(Cypress.env("username"), Cypress.env("password"));
     cy.navigateToAttendancePage();
-    cy.clickDateInput();
+    // cy.clickDateInput();
+    cy.traverseDate(7, 2024, "July");
   });
 });
