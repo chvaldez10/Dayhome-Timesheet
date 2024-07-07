@@ -6,7 +6,14 @@ describe("Extract CSV", () => {
     cy.visit("/");
   });
 
+  Cypress.on("uncaught:exception", (err, runnable) => {
+    // returning false to prevent test from failing because of website
+    return false;
+  });
+
   it("login", () => {
     cy.login(Cypress.env("username"), Cypress.env("password"));
+    cy.navigateToAttendancePage();
+    cy.clickDateInput();
   });
 });
