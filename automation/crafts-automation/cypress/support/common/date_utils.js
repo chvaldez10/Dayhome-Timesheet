@@ -15,9 +15,11 @@ function getExpectedDaysInMonth(month, year) {
 }
 
 Cypress.Commands.add("traverseDate", (month, year, monthName) => {
-  const expectedDays = getExpectedDaysInMonth(month, year);
+  // const expectedDays = getExpectedDaysInMonth(month, year);
+  const expectedDays = ["July 1, 2024", "July 2, 2024", "July 3, 2024"];
 
   cy.log(`Traversing date for month: ${month} and year: ${year}`);
+  cy.clickDateInput(monthName);
 
   // GIVEN expected days array
   // WHEN we traverse the array and click on each day
@@ -27,5 +29,16 @@ Cypress.Commands.add("traverseDate", (month, year, monthName) => {
     cy.get("[aria-label='" + day + "']")
       .should("exist")
       .click();
+    cy.wait(5000);
+    cy.get("a.buttons-csv span").contains("CSV").click();
+
+    const downloadPath = "cypress/downloads/Online Attendance - CRAFTS.csv";
+    const newFilePath = `cypress/downloads/${day}.csv`;
+
+    cy.readFile(downloadPath, "binary", { timeout: 10000 }).then(
+      (fileContent) => {
+        cy.writeFile(newFilePath, fileContent, "binary");
+      }
+    );
   });
 });
