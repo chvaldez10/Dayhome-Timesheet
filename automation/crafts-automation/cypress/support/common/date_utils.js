@@ -14,9 +14,13 @@ function getExpectedDaysInMonth(month, year) {
   return days;
 }
 
+function padNumber(num) {
+  return num < 10 ? "0" + num : num;
+}
+
 Cypress.Commands.add("traverseDate", (month, year, monthName) => {
-  // const expectedDays = getExpectedDaysInMonth(month, year);
-  const expectedDays = ["July 1, 2024", "July 2, 2024", "July 3, 2024"];
+  const expectedDays = getExpectedDaysInMonth(month, year);
+  const monthPadded = padNumber(month);
 
   cy.log(`Traversing date for month: ${month} and year: ${year}`);
   cy.clickDateInput(monthName);
@@ -24,21 +28,20 @@ Cypress.Commands.add("traverseDate", (month, year, monthName) => {
   // GIVEN expected days array
   // WHEN we traverse the array and click on each day
   // THEN all days in the array should all exist
-  expectedDays.forEach((day, index) => {
+  expectedDays.forEach((day, numDays) => {
+    numDays += 1;
+    const dayPadded = padNumber(numDays);
+    const outputFilename = `cypress/downloads/${year}-${monthPadded}-${dayPadded}.csv`;
+
     cy.clickDateInput(monthName);
-    cy.get("[aria-label='" + day + "']")
-      .should("exist")
-      .click();
+    cy.get(`[aria-label='${day}']`).should("exist").click();
     cy.wait(5000);
     cy.get("a.buttons-csv span").contains("CSV").click();
 
-    const downloadPath = "cypress/downloads/Online Attendance - CRAFTS.csv";
-    const newFilePath = `cypress/downloads/${day}.csv`;
-
-    cy.readFile(downloadPath, "binary", { timeout: 10000 }).then(
-      (fileContent) => {
-        cy.writeFile(newFilePath, fileContent, "binary");
-      }
-    );
+    cy.readFile(Cypress.env("expectedCraftsCsv"), "binary", {
+      timeout: 5000,
+    }).then((fileContent) => {
+      cy.writeFile(outputFilename, fileContent, "binary");
+    });
   });
 });

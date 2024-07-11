@@ -72,3 +72,4 @@ coverage/
 
 # temp files
 del*.*
+*.csv

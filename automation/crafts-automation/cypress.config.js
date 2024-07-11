@@ -8,6 +8,7 @@ module.exports = defineConfig({
       config.env.username = process.env.CRAFTS_USERNAME;
       config.env.password = process.env.CRAFTS_PASSWORD;
       config.env.attendancePageUrl = process.env.CRAFTS_ATTENDANCE_URL;
+      config.env.expectedCraftsCsv = process.env.EXPECTED_CRAFTS_CSV;
 
       return config;
     },
