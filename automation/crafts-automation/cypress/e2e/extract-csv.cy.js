@@ -7,13 +7,13 @@ describe("Extract CSV", () => {
   });
 
   Cypress.on("uncaught:exception", (err, runnable) => {
-    // returning false to prevent test from failing because of website
+    // returning false to prevent test from failing
     return false;
   });
 
-  it("login", () => {
+  it("Extract csv files", () => {
     cy.login(Cypress.env("username"), Cypress.env("password"));
     cy.navigateToAttendancePage();
-    cy.traverseDate(7, 2024, "July");
+    cy.traverseDate(8, 2024, "August");
   });
 });

@@ -21,6 +21,8 @@ function padNumber(num) {
 Cypress.Commands.add("traverseDate", (month, year, monthName) => {
   const expectedDays = getExpectedDaysInMonth(month, year);
   const monthPadded = padNumber(month);
+  const timeoutTime = 5000;
+  const waitTime = 3000;
 
   cy.log(`Traversing date for month: ${month} and year: ${year}`);
   cy.clickDateInput(monthName);
@@ -35,13 +37,15 @@ Cypress.Commands.add("traverseDate", (month, year, monthName) => {
 
     cy.clickDateInput(monthName);
     cy.get(`[aria-label='${day}']`).should("exist").click();
-    cy.wait(5000);
+    cy.wait(timeoutTime);
     cy.get("a.buttons-csv span").contains("CSV").click();
 
     cy.readFile(Cypress.env("expectedCraftsCsv"), "binary", {
-      timeout: 5000,
+      timeout: timeoutTime,
     }).then((fileContent) => {
       cy.writeFile(outputFilename, fileContent, "binary");
     });
+
+    cy.wait(waitTime);
   });
 });
