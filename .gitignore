@@ -3,9 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
 # Distribution / packaging
 .Python
 env/
@@ -46,25 +43,11 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-# Translations
-*.mo
-*.pot
-
 # Django stuff:
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
 
 # PyBuilder
 target/
@@ -72,27 +55,8 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# pyenv
-.python-version
-
 # celery beat schedule file
 celerybeat-schedule
-
-# dotenv
-.env
-
-# virtualenv
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
 
 # mkdocs documentation
 /site
@@ -102,14 +66,8 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# Pyre type checker
-.pyre/
-
 # pytype static type analyzer
 .pytype/
-
-# Cython debug symbols
-cython_debug/
 
 # Ignore Microsoft Office temporary files
 ~$*.docx
@@ -130,6 +88,7 @@ yarn-error.log
 build/
 
 # Environment local files should not be committed to a version control system
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -137,10 +96,6 @@ build/
 
 # MacOS system files that are not related to the project
 .DS_Store
-
-# Sublime Text project files
-*.sublime-workspace
-*.sublime-project
 
 # VSCode directory that stores settings, snippets, and extensions
 .vscode/
@@ -181,10 +136,6 @@ db/
 
 # Thumbnails cache on macOS
 ._*
-
-# Files that might appear on removable storage or network shares
-.Spotlight-V100
-.Trashes
 
 # Directories potentially created on network or external drives
 .AppleDB

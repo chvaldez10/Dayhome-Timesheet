@@ -30,3 +30,13 @@ The Crafts Web App is a robust dayhome management platform. While it includes a 
 - **Actions**:
   - Deploy Django server and Next.js client.
   - Create production copy of database using a predetermined database provider (likely Supabase).
+
+### Frameworks, Libraries, and Tools
+
+- **Frontend**: Next.js, Chakra UI, Cypress
+- **Backend**: Django,Django Ninja
+- **Database**: MySQL, PostgreSQL (to be determined)
+- **Deployment**: Vercel, Supabase (to be determined)
+- **Others**: Git, GitHin, Postman, Docker (to be determined)
+- **Notes**:
+  - The reason we're using Django Ninja and Chakra UI is to speed up development.
