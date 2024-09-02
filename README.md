@@ -8,27 +8,25 @@ The Crafts Web App is a robust dayhome management platform. While it includes a 
 
 ## ⚙️ Development Phases
 
-### Phase 1 (ETL Tool)
+### Phase 1: ETL and Automation (Completed)
 
-- **Objective**: Automate data handling.
-- **Description**: Focus on migrating CSV data to a local MySQL server.
+- **Objective**: The first phase of the project focuses on automating the data handling process. This results in a mocked local database using MySQL.
+- **Steps**:
+  - Used Cypress to automate the extraction of data from CSV files.
+  - Created scripts to populate the local MySQL database.
+  - Populated the local database on a recurring basis.
+
+### Phase 2: Django Server and Next.js Client (In Progress)
+
+- **Objective**: Create a Django server and a Next.js client.
 - **Actions**:
-  - Extract data from CSV files.
-  - Populate the local database.
-  - Aggregate data to enhance and automate timesheet processes.
+  - Create a Next.js client and Django server.
+  - Copy MySQL data to PostgreSQL.
+  - Deprecate MySQL.
 
-### Phase 2 (On Deck)
+### Phase 3: Deployment (On Deck)
 
-- **Objective**: Migrate data to a cloud service and create a Django server.
-- **Description**: Aim to migrate all local data to a cloud service like Supabase for multi-machine accessibility.
+- **Objective**: Deploy the application to a cloud service.
 - **Actions**:
-  - Replicate the MySQL database to Supabase.
-  - Create a Django server.
-
-### Phase 3 (On Deck)
-
-- **Objective**: Improve user experience and accessibility.
-- **Description**: Focus on developing a user-friendly web interface.
-- **Actions**:
-  - Create a client-facing web application using Next.js and Chakra UI.
-  - Present results in an intuitive, user-friendly interface.
+  - Deploy Django server and Next.js client.
+  - Create production copy of database using a predetermined database provider (likely Supabase).
