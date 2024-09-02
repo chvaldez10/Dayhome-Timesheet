@@ -7,3 +7,5 @@ scripts:
     - cd src && python manage.py migrate
   create_superuser:
     - cd src && python manage.py createsuperuser
+  show_migrations:
+    - cd src && python manage.py showmigrations

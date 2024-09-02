@@ -1,8 +1,12 @@
+# django things
 django
 django-cors-headers
 django-ninja
 django-ninja-jwt[crypto]
 dj-database-url
+django-admin-interface
+django-jazzmin
+
 psycopg[binary]
 pydantic[email]
 python-decouple
