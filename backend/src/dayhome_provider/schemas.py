@@ -7,6 +7,7 @@ class DayHomeProviderListSchema(Schema):
     first_name: str
     last_name: str
     location: str
+    email: EmailStr
 
 class DayHomeProviderDetailSchema(Schema):
     id: int
@@ -15,3 +16,4 @@ class DayHomeProviderDetailSchema(Schema):
     location: str
     created_at: datetime
     updated_at: datetime
+    email: EmailStr
