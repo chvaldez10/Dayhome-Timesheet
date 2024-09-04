@@ -25,6 +25,9 @@ INSTALLED_APPS = [
     'ninja_extra',
     'ninja_jwt',
     'core',
+    'dayhome_provider',
+    'dayhome_children',
+    'dayhome_entries',
 ]
 
 MIDDLEWARE = [

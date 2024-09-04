@@ -30,7 +30,7 @@ CREATE TABLE dayhome_children_daily_log(
     total_time FLOAT CHECK (total_time >= 0) DEFAULT 0,
     status dayhome_status DEFAULT 'absent',
     children_id INTEGER NOT NULL REFERENCES dayhome_children(id),
-    health_check VARCHAR(255),
+    health_check TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
