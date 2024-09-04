@@ -8,14 +8,18 @@ CREATE TABLE dayhome_provider(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    location VARCHAR(255) NOT NULL
+    location VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE dayhome_children(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    provider_id INTEGER REFERENCES dayhome_provider(id)
+    provider_id INTEGER REFERENCES dayhome_provider(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE dayhome_children_daily_log(
@@ -26,7 +30,9 @@ CREATE TABLE dayhome_children_daily_log(
     total_time FLOAT CHECK (total_time >= 0) DEFAULT 0,
     status dayhome_status DEFAULT 'absent',
     children_id INTEGER NOT NULL REFERENCES dayhome_children(id),
-    health_check VARCHAR(255)
+    health_check VARCHAR(255),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE dayhome_provider_daily_log(
@@ -35,7 +41,9 @@ CREATE TABLE dayhome_provider_daily_log(
     sign_in_time TIMESTAMP WITH TIME ZONE,
     sign_out_time TIMESTAMP WITH TIME ZONE,
     total_time FLOAT CHECK (total_time >= 0) DEFAULT 0, -- Ensure non-negative total_time
-    provider_id INTEGER NOT NULL REFERENCES dayhome_provider(id)
+    provider_id INTEGER NOT NULL REFERENCES dayhome_provider(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Indexes for optimization
