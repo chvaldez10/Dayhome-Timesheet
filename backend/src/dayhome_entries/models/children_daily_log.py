@@ -8,7 +8,7 @@ class ChildrenDailyLog(TimeStampModel):
     sign_out_time = models.DateTimeField(null=True, blank=True)
     total_time = models.FloatField(default=0)
     status = models.CharField(max_length=10, choices=DayhomeStatus.choices, default=DayhomeStatus.ABSENT)
-    children_id = models.ForeignKey('dayhome_children.DayhomeChildren', on_delete=models.PROTECT)
+    children_id = models.ForeignKey('dayhome_children.DayHomeChildren', on_delete=models.PROTECT)
     health_check = models.CharField(null=True, blank=True)
     
     class Meta:
