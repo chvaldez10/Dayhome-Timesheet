@@ -7,6 +7,7 @@ from ninja_jwt.controller import NinjaJWTDefaultController
 api = NinjaExtraAPI()
 api.register_controllers(NinjaJWTDefaultController)
 api.add_router("/provider/", "dayhome_provider.api.router")
+api.add_router("/children/", "dayhome_children.api.router")
 
 class UserSchema(Schema):
     username: str
