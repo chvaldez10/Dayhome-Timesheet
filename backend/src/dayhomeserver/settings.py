@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'dayhome_provider',
     'dayhome_children',
     'dayhome_entries',
+    'explorer',
 ]
 
 MIDDLEWARE = [
@@ -63,8 +64,7 @@ WSGI_APPLICATION = 'dayhomeserver.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# TODO: change to postgres
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -164,3 +164,8 @@ NINJA_JWT = {
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=7),
 }
+
+# SQL Explorer
+# TODO: add permissions
+EXPLORER_CONNECTIONS = {'Default': 'default'}
+EXPLORER_DEFAULT_CONNECTION = 'default'
