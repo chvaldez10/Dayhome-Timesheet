@@ -2,6 +2,7 @@ from csv_calendar.csv_calendar import MonthlyCalendar
 from database.my_sql_database import MySQLDatabase
 from database.my_sql_helper import query_for_daily_entry
 from utilities.date_time_utilities import format_timedelta_as_hhmm_ampm
+from datetime import timedelta
 
 import pandas as pd
 import json
@@ -50,7 +51,9 @@ def calculate_week_of_month(date, first_day_of_the_month) -> int:
     """
     Calculate the week of the month for a given date.
     """
-    return (date.day + first_day_of_the_month - 1) // 7 + 1
+    # Adjust for months starting on weekend
+    offset = 1 if first_day_of_the_month >= 5 else 0
+    return (date.day + first_day_of_the_month - 1) // 7 + 1 - offset
 
 def update_calendar_if_entry_exists(calendar: MonthlyCalendar, week_of_month: int, day_of_week: str, daily_entry) -> None:
     """
