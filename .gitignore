@@ -144,6 +144,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# JetBrains
+.idea/
+
 # Personal files
 database/populate.sql
 del_me.txt
